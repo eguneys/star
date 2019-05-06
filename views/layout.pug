@@ -7,6 +7,7 @@ html(lang='en')
     link(rel="icon" type="image/png" href!=staticUrl("favicon-32x32.png"))
     link(rel="icon" type="image/png" href!=staticUrl("favicon-16x16.png"))
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto")
     !=cssTag("site")
     block moreCss
   body
@@ -20,3 +21,8 @@ html(lang='en')
              span=".dev"
     div(id="main-wrap")
       block body
+    if (isProd)
+      !=jsAt("compiled/star.site.min.js")
+    else
+      !=jsAt("compiled/star.site.js")
+    block moreJs

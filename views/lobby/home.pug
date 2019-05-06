@@ -2,12 +2,17 @@ extends ../layout
 
 block moreCss
   !=cssTag("lobby")
+
+block moreJs
+  - var translations = [trans.quickPairing];
+  !=jsAt(`compiled/star.lobby${isProd ? (".min"):""}.js`, true)
+  !=embedJsUnsafe(`star=window.star||{};star_lobby=${JSON.stringify({data: data, i18n: i18nJsObject(translations)})}`)
   
 block body
   main(class="lobby")
     div(class="lobby__table")
       div(class="lobby__counters")
-        a(id="nb_connected_players" href="#")= trans.nbPlayers("?")
-        a(id="nb_games_in_play" href="#")= trans.nbGamesInPlay("?")
+        a(id="nb_connected_players" href="#")= trans.nbPlayers.apply("?")
+        a(id="nb_games_in_play" href="#")= trans.nbGamesInPlay.apply("?")
     div(class="lobby__app")
       div(class="lobby__app__content")

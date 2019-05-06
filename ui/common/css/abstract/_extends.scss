@@ -6,10 +6,18 @@
   font-family: 'Noto Sans';
 }
 
+%roboto {
+  font-family: 'Roboto';
+}
+
 %page-font {
   color: $c-font-page;
 }
 
 %page-text {
   @extend %page-font, %page-text-shadow !optional;
+}
+
+%break-word {
+  overflow-wrap: break-word;
 }

@@ -11,9 +11,27 @@ module.exports = function(locals) {
 };
 
 function i18nHelper(locals) {
+  function Translated(key, value) {
+    this.key = key;
+    this.value = value; 
+
+    this.apply = (n) => {
+      return this.value.replace('%s', n);
+    };
+  }
+
   locals.trans = {
-    nbPlayers: (n) => { return `${n} online players`; },
-    nbGamesInPlay: (n) => { return `${n} games in play`; }
+    nbPlayers: new Translated('nbPlayers', '%s online players'),
+    nbGamesInPlay: new Translated('nbGamesInPlay', '%s games in play'),
+    quickPairing: new Translated('quickPairing', 'Quick Pairing')
+  };
+
+  locals.i18nJsObject = function(keys) {
+    var res = {};
+    keys.forEach(key => {
+      res[key.key] = key.value;
+    });
+    return res;
   };
 }
 
@@ -30,6 +48,14 @@ function assetHelper(locals, isProd) {
 
   locals.staticUrl = function(path) {
     return `${assetBaseUrl}/assets/${path}`;
+  };
+
+  locals.jsAt = function(path, defer = false) {
+    return `<script src=${assetUrl(path)} ${defer?"defer":""}></script>`;
+  };
+
+  locals.embedJsUnsafe = function(js) {
+    return `<script>${js}</script>`;
   };
 
   function cssTagWithTheme(name, theme) {

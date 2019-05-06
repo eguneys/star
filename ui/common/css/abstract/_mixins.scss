@@ -1,0 +1,11 @@
+@mixin box-radius {
+  border-radius: $box-radius-size;
+}
+
+@mixin box-shadow {
+  box-shadow: $box-shadow;
+}
+
+@mixin transition($prop: all, $dur: $transition-duration) {
+  transition: $prop $dur;
+}

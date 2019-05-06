@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babelify": "^10.0.0",
     "gulp": "^4.0.1",
     "gulp-cached": "^1.1.1",
     "gulp-filter": "^5.1.0",
@@ -10,6 +13,11 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sass-inheritance": "^1.1.2",
-    "gulp-sourcemaps": "^2.6.5"
+    "gulp-size": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^3.11.1"
   }
 }

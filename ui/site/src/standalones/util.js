@@ -1,0 +1,1 @@
+window.star = window.star || {};

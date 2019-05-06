@@ -1,0 +1,12 @@
+{
+  "name": "lobby",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "snabbdom": "^0.7.3"
+  }
+}
