@@ -32,7 +32,18 @@ const devSource = () => browserify(browserifyOpts('src/index.js', true))
       .pipe(source(`${fileBaseName}.js`))
       .pipe(destination());
 
-const tasks = [];
+function makeDependencies(filename) {
+  return function bundleDeps() {
+    return gulp.src([
+      '../../public/javascripts/vendor/jquery.min.js'
+    ]).pipe(concat(filename))
+      .pipe(destination());
+  };
+}
+
+const deps = makeDependencies('star.deps.js');
+
+const tasks = [deps];
 
 const dev = gulp.series(tasks.concat([devSource]));
 

@@ -8,3 +8,10 @@ exports.home = Open((res, ctx) => {
       
     }}, ctx);
 });
+
+exports.socket = function(ws, req) {
+  console.log(ws);
+  ws.on('message', function(msg) {
+    // ws.send(msg);
+  });
+};

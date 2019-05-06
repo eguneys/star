@@ -2,6 +2,9 @@
   "net": {
     "asset": {
       "domain": "o.com:3000"
+    },
+    "socket": {
+      "domain": "socket.o.com"
     }
   }
 }

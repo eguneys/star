@@ -38,9 +38,12 @@ function i18nHelper(locals) {
 function assetHelper(locals, isProd) {
 
   var assetDomain = require('../modules/api/Env').current.AssetDomain;
+  var socketDomain = require('../modules/api/Env').current.SocketDomain;
+
   
   var assetBaseUrl = `//${assetDomain}`;
 
+  locals.socketDomain = socketDomain;
 
   locals.cssTag = function(name) {
     return cssTagWithTheme(name, 'light');

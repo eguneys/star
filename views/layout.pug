@@ -10,7 +10,7 @@ html(lang='en')
     link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto")
     !=cssTag("site")
     block moreCss
-  body
+  body(data-socket-domain=socketDomain)
     header(id="top")
       div(class="site-title-nav")
         h1(class="site-title")
@@ -24,5 +24,6 @@ html(lang='en')
     if (isProd)
       !=jsAt("compiled/star.site.min.js")
     else
+      !=jsAt("compiled/star.deps.js")
       !=jsAt("compiled/star.site.js")
     block moreJs

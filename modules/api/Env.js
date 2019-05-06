@@ -5,6 +5,7 @@ function Env({ isProd }) {
   this.isProd = isProd;
 
   this.AssetDomain = config.get("net.asset.domain");
+  this.SocketDomain = config.get("net.socket.domain");
 
 }
 

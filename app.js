@@ -1,7 +1,12 @@
-var createError = require('http-errors');
+var http = require('http');
 var path = require('path');
+var createError = require('http-errors');
+
 var express = require('express');
 var app = express();
+
+var server = http.createServer(app);
+var expressWs = require('express-ws')(app, server);
 
 var viewHelpers = require('./helpers');
 var indexRouter = require('./routes');
@@ -29,4 +34,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = { app, server };
