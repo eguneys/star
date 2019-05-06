@@ -12,12 +12,12 @@ module.exports = function(locals) {
 
 function i18nHelper(locals) {
   function Translated(key, value) {
-    this.key = key;
-    this.value = value; 
-
-    this.apply = (n) => {
-      return this.value.replace('%s', n);
+    var f = (n) => {
+      return value.replace('%s', n);
     };
+    f.key = key;
+    f.value = value;
+    return f;
   }
 
   locals.trans = {
