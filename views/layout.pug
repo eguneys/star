@@ -6,7 +6,17 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel="icon" type="image/png" href!=staticUrl("favicon-32x32.png"))
     link(rel="icon" type="image/png" href!=staticUrl("favicon-16x16.png"))
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans")
     !=cssTag("site")
+    block moreCss
   body
-    div
-      block content
+    header(id="top")
+      div(class="site-title-nav")
+        h1(class="site-title")
+          a(href="/") oyunkeyf
+            if (isProd)
+             span=".net"
+            else
+             span=".dev"
+    div(id="main-wrap")
+      block body

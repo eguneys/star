@@ -1,0 +1,35 @@
+@import '../abstract/functions';
+
+/* Colors */
+
+@function c-dimmer($color, $weight: 17%) {
+  @return mix(#fff, $color, $weight);
+}
+
+@function c-clearer($color, $weight: 17%) {
+  @return mix(#000, $color, $weight);
+}
+
+$c-site-hue: 37;
+
+$c-bg-page: hsl($c-site-hue, 10%, 92%);
+
+$c-bg-zebra: hsl($c-site-hue, 12%, 96.5%);
+$c-bg-zebra2: hsl($c-site-hue, 12%, 92%);
+
+$c-body-gradient: hsl($c-site-hue, 12%, 84%);
+
+$c-font: hsl(0%, 0%, 30%);
+$c-font-page: c-light($c-font, 37%);
+
+/* Primary blue */
+$c-primary: hsl(209, 79%, 53%);
+$c-primary-dim: c-dimmer($c-primary);
+$c-primary-over: #fff;
+
+$c-link: $c-primary;
+$c-link-dim: $c-primary-dim;
+$c-link-hover: c-clearer(saturate($c-primary, 100%), 35%);
+
+$c-font-shadow: white;
+$text-shadow: 0 1px 0 $c-font-shadow;

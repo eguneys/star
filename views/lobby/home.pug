@@ -1,4 +1,13 @@
 extends ../layout
+
+block moreCss
+  !=cssTag("lobby")
   
-block content
-  div Hom
+block body
+  main(class="lobby")
+    div(class="lobby__table")
+      div(class="lobby__counters")
+        a(id="nb_connected_players" href="#")= trans.nbPlayers("?")
+        a(id="nb_games_in_play" href="#")= trans.nbGamesInPlay("?")
+    div(class="lobby__app")
+      div(class="lobby__app__content")

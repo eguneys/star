@@ -4,9 +4,25 @@ var apiEnv = ApiEnv.current;
 module.exports = function(locals) {
   var isProd = apiEnv.isProd;
 
+  locals.isProd = isProd;
+
+  i18nHelper(locals);
+  assetHelper(locals, isProd);
+};
+
+function i18nHelper(locals) {
+  locals.trans = {
+    nbPlayers: (n) => { return `${n} online players`; },
+    nbGamesInPlay: (n) => { return `${n} games in play`; }
+  };
+}
+
+function assetHelper(locals, isProd) {
+
   var assetDomain = require('../modules/api/Env').current.AssetDomain;
   
   var assetBaseUrl = `//${assetDomain}`;
+
 
   locals.cssTag = function(name) {
     return cssTagWithTheme(name, 'light');
@@ -27,4 +43,4 @@ module.exports = function(locals) {
   function assetUrl(path) {
     return `${assetBaseUrl}/assets/${path}`;
   }
-};
+}

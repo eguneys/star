@@ -1,0 +1,12 @@
+/* Widths */
+
+$mq-xx-small: (min-width 500px);
+
+
+/* Heights */
+$mq-x-short: (min-height 400px);
+$mq-short: (min-height 500px);
+$mq-tall: (min-height 600px);
+$mq-x-tall: (min-height 700px);
+
+$mq-site-header-tall: $mq-tall;

@@ -1,0 +1,23 @@
+%flex-wrap {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+%flex-center {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+%flex-center-nowrap {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+%flex-between {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}

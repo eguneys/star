@@ -1,0 +1,4 @@
+html {
+  @extend %base-font-fallback;
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,10 @@
+.lobby {
+  &__counters {
+    @extend %flex-between, %page-text;
+    background: $c-bg-zebra;
+    padding: $block-gap #{$block-gap * 2};
+    a {
+      color: $c-font-page;
+    }
+  }
+}

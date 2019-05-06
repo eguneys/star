@@ -1,0 +1,15 @@
+%base-font-fallback {
+  font-family: 'Noto Sans', Sans-Serif;
+}
+
+%base-font {
+  font-family: 'Noto Sans';
+}
+
+%page-font {
+  color: $c-font-page;
+}
+
+%page-text {
+  @extend %page-font, %page-text-shadow !optional;
+}

@@ -1,0 +1,26 @@
+html {
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $c-bg-page linear-gradient(to bottom, $c-body-gradient, $c-bg-page 116px) no-repeat;
+  color: $c-font;
+  overflow-x: hidden;
+}
+
+a {
+  color: $c-link;
+  text-decoration: none;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $c-link-hover;
+  }
+}

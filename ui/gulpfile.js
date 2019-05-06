@@ -62,7 +62,7 @@ function createThemedBuilds(cb) {
           if(!fs.existsSync(themed)) {
             const buildName = file.replace(/.+\/_(.+)\.scss$/, '$1');
             const code = `@import '../../../common/css/theme/${theme}';\n@import '${buildName}';\n`;
-            console.log('Create missing SCSS themed build: ${themed}');
+            console.log(`Create missing SCSS themed build: ${themed}`);
             fs.writeFileSync(themed, code);
           }
         });
