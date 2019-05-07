@@ -9,3 +9,5 @@ pids
 
 node_modules
 
+public/compiled
+public/trans

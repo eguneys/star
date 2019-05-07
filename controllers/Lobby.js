@@ -10,8 +10,11 @@ exports.home = Open((res, ctx) => {
 });
 
 exports.socket = function(ws, req) {
-  console.log(ws);
   ws.on('message', function(msg) {
-    // ws.send(msg);
+    ws.send(JSON.stringify({
+      t: "n",
+      d: 1,
+      r: 0
+    }));
   });
 };

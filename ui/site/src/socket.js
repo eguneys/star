@@ -231,7 +231,7 @@ star.StrongSocket = function(url, version, settings) {
     destroy,
     options,
     pingInterval: function() {
-      return computePingInterval() + averageLag;
+      return computePingDelay() + averageLag;
     },
     averageLag: function() {
       return averageLag;

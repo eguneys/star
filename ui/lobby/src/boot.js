@@ -2,6 +2,20 @@ module.exports = function(cfg, element) {
   var pools = [{ id: "2", lim: 2 }];
   var lobby;
 
+  var nbRoundSpread = spreadNumber(
+    document.querySelector('#nb_games_in_play > strong'),
+    8,
+    function() {
+      return star.socket.pingInterval();
+    });
+  var nbUserSpread = spreadNumber(
+    document.querySelector('#nb_connected_players > strong'),
+    10,
+    function() {
+      return star.socket.pingInterval();
+    });
+
+
   var onFirstConnect = function() {
     
   };
@@ -30,4 +44,28 @@ module.exports = function(cfg, element) {
         onFirstConnect: onFirstConnect
       }
     });
+
+  function spreadNumber(el, nbSteps, getDuration) {
+    var previous, displayed;
+    var display = function(prev, cur, it) {
+      var val = star.numberFormat(Math.round(((prev * (nbSteps - 1 - it)) + (cur * (it + 1))) / nbSteps));
+      if (val != displayed) {
+        el.textContent = val;
+        displayed = val;
+      }
+    };
+    var timeouts = [];
+    return function(nb, overrideNbSteps) {
+      if (!el || (!nb && nb !== 0)) return;
+      if (overrideNbSteps) nbSteps = Math.abs(overrideNbSteps);
+      timeouts.forEach(clearTimeout);
+      timeouts = [];
+      var prev = previous === 0 ? 0 : (previous || nb);
+      previous = nb;
+      var interv = Math.abs(getDuration() / nbSteps);
+      for (var i = 0; i < nbSteps; i++) {
+        timeouts.push(setTimeout(display.bind(null, prev, nb, i), Math.round(i * interv)));
+      }
+    };
+  }
 };

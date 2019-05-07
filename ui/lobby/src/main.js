@@ -23,6 +23,7 @@ export function start(opts) {
   vnode = patch(opts.element, blueprint);
 
   return {
+    socketReceive: ctrl.socket.receive,
     redraw: ctrl.redraw
   };
 }
