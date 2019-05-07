@@ -3,7 +3,8 @@ function isMode(mode) {
 }
 
 var ExpressApp = {
-  isProd: isMode('development')
+  isProd: isMode('development'),
+  starBus: new (require('./Bus'))
 };
 
-exports = ExpressApp;
+module.exports = ExpressApp;

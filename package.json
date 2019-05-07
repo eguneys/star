@@ -12,6 +12,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-ws": "^4.0.0",
+    "node-cache": "^4.2.0",
     "pug": "^2.0.3"
   },
   "devDependencies": {

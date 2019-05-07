@@ -29,7 +29,7 @@ module.exports = (standalone, fileBaseName, dir) => {
 
   const dev = () => browserify(browserifyOpts(true))
         .transform('babelify',
-                   { presets: ['@babel/preset-env'] })
+                   { presets: ['@babel/preset-env'], sourcemaps: true })
         .bundle()
         .pipe(source(`${fileBaseName}.js`))
         .pipe(destination());

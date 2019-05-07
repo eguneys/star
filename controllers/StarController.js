@@ -26,3 +26,5 @@ function reqToCtx(req) {
 function restoreUser(req) {
   return Promise.resolve();
 }
+
+exports.reqToCtx = reqToCtx;

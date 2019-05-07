@@ -1,4 +1,4 @@
 import './standalones/util';
 import './standalones/trans';
-import './socket';
+import './socket2';
 import './main';

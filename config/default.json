@@ -6,5 +6,12 @@
     "socket": {
       "domain": "socket.o.com"
     }
+  },
+  "lobby": {
+    "socket": {
+      "uid": {
+          "ttl": 10
+      }
+    }
   }
 }

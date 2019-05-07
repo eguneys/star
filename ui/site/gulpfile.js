@@ -27,7 +27,7 @@ const prodSource = () => browserify(browserifyOpts('src/index.js', false))
 
 const devSource = () => browserify(browserifyOpts('src/index.js', true))
       .transform('babelify',
-                 { presets: ['@babel/preset-env'] })
+                 { presets: ['@babel/preset-env'] , sourceMaps: true})
       .bundle()
       .pipe(source(`${fileBaseName}.js`))
       .pipe(destination());

@@ -1,4 +1,9 @@
 var { Open, negotiate } = require('./StarController');
+var { SocketOption } = require('./StarSocket');
+
+var { getSocketUid } = require('./RequestGetter');
+
+var { Env } = require('../Env');
 
 exports.home = Open((res, ctx) => {
   negotiate({
@@ -9,12 +14,8 @@ exports.home = Open((res, ctx) => {
     }}, ctx);
 });
 
-exports.socket = function(ws, req) {
-  ws.on('message', function(msg) {
-    ws.send(JSON.stringify({
-      t: "n",
-      d: 1,
-      r: 0
-    }));
-  });
-};
+exports.socket = SocketOption((ws, ctx) => {
+  const uid = getSocketUid("sri", ctx);
+  if (!uid) return Promise.resolve(false);
+  return Env.lobby.socketHandler(ws, uid, ctx.me);
+});
