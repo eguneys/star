@@ -8,6 +8,7 @@
     }
   },
   "lobby": {
+    "broom_period": 2,
     "socket": {
       "uid": {
           "ttl": 10

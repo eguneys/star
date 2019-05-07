@@ -1,6 +1,7 @@
 var http = require('http');
 var path = require('path');
 var createError = require('http-errors');
+var bodyParser = require('body-parser');
 
 var express = require('express');
 var app = express();
@@ -15,6 +16,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 viewHelpers(app.locals);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/assets', express.static(path.join(__dirname, 'public')));
 

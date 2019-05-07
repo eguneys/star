@@ -9,7 +9,6 @@ module.exports = class Population extends Trouper {
 
     this.nb = 0;
 
-    console.log(this.nb);
     this.starBus.subscribe(this, 'socketEnter', 'socketLeave');
   }
 

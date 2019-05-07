@@ -15,3 +15,11 @@ exports.Member = function Member(ws, user, uid) {
 exports.Join = function(ws, uid, user, resolve) {
   return { type: "join", ws, uid, user, resolve };
 };
+
+exports.JoinHook = function(uid, hook, game) {
+  return { type: "joinhook", uid, hook, game };
+};
+
+exports.AddHook = function(hook) {
+  return { type: "addhook", hook };
+};
