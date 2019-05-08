@@ -13,5 +13,4 @@ router.post('/setup/hook/:uid', setupController.hook);
 
 router.get('/:fullId(\\w{12})', roundController.player);
 
-
 module.exports = router;

@@ -18,6 +18,4 @@ function onListening() {
   var addr = server.address();
   var bind = 'port ' + addr.port;
   console.log('Listening on ' + bind);
-
-  require('../Env').current();
 }

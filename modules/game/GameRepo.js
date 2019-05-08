@@ -1,13 +1,22 @@
-const GameRepo = {
+var Env = require('./Env');
+var { gameBSONHandler } = require('./BSONHandlers');
 
-  game(gameId) {
-    return Promise.resolve(null);
-  },
+const GameRepo = (function() {
 
-  insertDenormalized(game) {
-    console.log('insert denormalized');
-    return Promise.resolve();
-  }
-};
+  var coll = Env.current().gameColl;
+
+  return {
+    game(gameId) {
+      return coll.byId(gameId,
+                       gameBSONHandler.read);
+    },
+
+    insertDenormalized(game) {
+      var bson = gameBSONHandler.write(game);
+      
+      return coll.insert(bson);
+    }
+  };
+})();
 
 module.exports = GameRepo;

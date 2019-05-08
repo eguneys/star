@@ -1,5 +1,3 @@
-var Game = require('./Game');
-
 function Pov(game, side) {
   
 }
@@ -29,3 +27,5 @@ const PlayerRef = function(fullId) {
 };
 
 module.exports.PlayerRef = PlayerRef;
+
+var Game = require('./Game');

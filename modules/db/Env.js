@@ -2,6 +2,7 @@ var { lazyVal } = require('../common/LazyVal');
 var mongodbUri = require('mongodb-uri');
 const MongoClient = require('mongodb').MongoClient;
 var config = require('config');
+var ExtendColl = require('./CollExt');
 
 function Env(name, config) {
   var uri = config.get('uri');
@@ -12,14 +13,11 @@ function Env(name, config) {
         var uriObj = mongodbUri.parse(uri);
 
         this.db = client.db(uriObj.database);
-
         resolve();
       });
   });
 
-  this.coll = (name) => {
-    this.db.collection(name);
-  };
+  this.coll = (name) => ExtendColl(this.db.collection(name));
 
 }
 

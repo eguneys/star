@@ -8,7 +8,7 @@ var HookConfig = require('../modules/setup/HookConfig');
 
 var Env = require('../Env');
 
-var env = Env.setup;
+var env = Env.setup();
 
 exports.hook = function(req, res) {
   var uid = req.params.uid;

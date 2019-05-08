@@ -2,7 +2,7 @@ var { lazyVal } = require('./modules/common/LazyVal');
 var config = require('config');
 
 function EnvClass(config) {
-  Env.db().promise.then(() => {
+  return Env.db().promise.then(() => {
     Env.game();
     Env.round();
     Env.lobby();

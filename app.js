@@ -10,7 +10,6 @@ var server = http.createServer(app);
 var expressWs = require('express-ws')(app, server);
 
 var viewHelpers = require('./helpers');
-var indexRouter = require('./routes');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -22,20 +21,26 @@ app.use(bodyParser.json());
 
 app.use('/assets', express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+require('./Env').current().then(() => {
 
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+  var indexRouter = require('./routes');
+  app.use('/', indexRouter);
 
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  app.use(function(req, res, next) {
+    next(createError(404));
+  });
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  });
+
 });
 
 module.exports = { app, server };
+

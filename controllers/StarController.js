@@ -33,8 +33,8 @@ function OptionFuResult(fua, res, ctx) {
     fua.then(a => {
       if (a) {
         op(a);
-      }
-      notFound(ctx, res);
+      } else
+        notFound(ctx, res);
     }).catch(err => {
       error(ctx, res, err);
     });

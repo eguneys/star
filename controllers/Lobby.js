@@ -3,7 +3,7 @@ var { SocketOption } = require('./StarSocket');
 
 var { getSocketUid } = require('./RequestGetter');
 
-var { Env } = require('../Env');
+var Env = require('../Env');
 
 exports.home = Open((res, ctx) => {
   negotiate({
@@ -17,5 +17,5 @@ exports.home = Open((res, ctx) => {
 exports.socket = SocketOption((ws, ctx) => {
   const uid = getSocketUid("sri", ctx);
   if (!uid) return Promise.resolve(false);
-  return Env.lobby.socketHandler(ws, uid, ctx.me);
+  return Env.lobby().socketHandler(ws, uid, ctx.me);
 });
