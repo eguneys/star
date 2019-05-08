@@ -7,6 +7,11 @@
       "domain": "socket.o.com"
     }
   },
+  "round": {
+    "active": {
+      "ttl": 40
+    }
+  },
   "lobby": {
     "broom_period": 2,
     "socket": {

@@ -1,0 +1,13 @@
+extends ../layout
+
+block moreCss
+  !=cssTag('not-found')
+  
+block body
+  main(class="not-found page-small box box-pad")
+    header
+      h1= 404
+      div
+        strong= "Page not found!"
+        p= "Return to"
+          a(href="/")= " the homepage"
