@@ -35,6 +35,10 @@ class SocketTrouper extends Trouper {
     case 'broom':
       this.broom();
       return true;      
+    case 'quit':
+      const { uid } = msg;
+      this.withMember(uid, _ => this.quit(uid, _));
+      return true;
     }
     return false;
   }
@@ -52,12 +56,13 @@ class SocketTrouper extends Trouper {
     });
   }
 
-  quit(uid) {
-    this.withMember(uid, (member) => {
-      delete this.members[uid];
-      this.starBus.publish(SocketLeave, 'socketLeave');
-                          });
+  quit(uid, member) {
+    delete this.members[uid];
+    this.starBus.publish(SocketLeave, 'socketLeave');
+    this.afterQuit(uid, member);
   }
+
+  afterQuit(uid, member) {}
 
   addMember(uid, member) {
     this.eject(uid);

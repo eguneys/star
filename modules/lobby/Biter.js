@@ -1,3 +1,4 @@
+var Player = require('../game/Player');
 var Game = require('../game/Game');
 var GameRepo = require('../game/GameRepo');
 var { JoinHook } = require('./messageApi');
@@ -15,7 +16,10 @@ function join(hook, uid) {
 }
 
 function makeGame(hook) {
-  return Game.make().start();
+  return Game
+    .make(Player.make('player1'),
+          Player.make('player2'))
+    .start();
 }
 
 function canJoin(hook) {

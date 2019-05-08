@@ -1,5 +1,6 @@
 var SocketTrouper = require('../socket/SocketTrouper');
 var { SendHookRemovals, Member } = require('./messageApi');
+var AnonCookie = require('../game/AnonCookie');
 
 class LobbySocket extends SocketTrouper {
   constructor(uidTtl, starBus) {
@@ -35,6 +36,19 @@ class LobbySocket extends SocketTrouper {
       this.removedHookIds = `${this.removedHookIds}${hookId}`;
       return true;
     };
+    case "joinhook": {
+      const { uid, hook, game } = msg;
+      
+      this.withMember(hook.uid, member => {
+        this.notifyPlayerStart(game, 'player1')(member);
+      });
+
+      this.withMember(uid, member => {
+        this.notifyPlayerStart(game, 'player2')(member);
+      });
+      
+      return true;
+    };
     case "sendhookremovals": {
       if (this.removedHookIds.length > 0) {
         var sMsg = this.makeMessage('hrm', this.removedHookIds);
@@ -65,6 +79,16 @@ class LobbySocket extends SocketTrouper {
     return false;
   };
 
+  notifyPlayerStart(game, side) {
+    return this.notifyMember("redirect", {
+      id: game.fullIdOf(side),
+      url: this.playerUrl(game.fullIdOf(side)),
+      cookie: AnonCookie.json(game, side)
+    });
+  }
+
+  playerUrl(fullId) { return `/${fullId}`; }
+
   withActiveMemberByUidString(uid) {
     return (f) => {
       const member = this.members[uid];
@@ -72,8 +96,7 @@ class LobbySocket extends SocketTrouper {
     };
   };
 
-  quit(uid) {
-    super.quit(uid);
+  afterQuit(uid, member) {
     this.hookSubscriberUids = this.hookSubscriberUids.filter(_ => _ !== uid);
   }
 }

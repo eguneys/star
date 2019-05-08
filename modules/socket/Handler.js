@@ -1,4 +1,5 @@
 var Socket = require('./Socket');
+var { Quit } = require('./messageApi');
 
 var Handler = {
   defaultOnPing: (socket, member, uid) => {
@@ -25,6 +26,9 @@ var Handler = {
                  } else {
                    fullCtrl(msg.t, msg);
                  }
+               });
+               ws.on('close', function() {
+                 socket.send(Quit(uid));
                });
   }
 };

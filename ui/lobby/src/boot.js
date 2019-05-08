@@ -32,7 +32,10 @@ module.exports = function(cfg, element) {
           setTimeout(function() {
             nbRoundSpread(msg.r);
           }, star.socket.pingInterval() / 2);
-        }
+        },
+        redirect: function(e) {
+          window.star.redirect(e);
+        },
       },
       options: {
         name: 'lobby',
