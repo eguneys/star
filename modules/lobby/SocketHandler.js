@@ -1,13 +1,20 @@
-var { Join } = require('./messageApi');
+var { Join, HookSub } = require('./messageApi');
 var Handler = require('../socket/Handler');
 var Socket = require('../socket/Socket');
 
-function SocketHandler(socket) {
+function SocketHandler(lobby, socket) {
   var pong = Socket.initialPong;
 
   var controller = function(socket, member) {
-    return function(msg) {
-      console.log(msg);
+    return function(t, msg) {
+      switch (t) {
+      case 'hookIn':
+        lobby.send(HookSub(member, true));
+        return true;
+      case 'hookOut':
+        socket.send(HookSub(member, false));
+        return true;
+      }
       return false;
     };
   };

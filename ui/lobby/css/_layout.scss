@@ -1,3 +1,12 @@
+$mq-col2: $mq-xx-small;
+
+@mixin lobby-app-size {
+  min-height: 300px;
+  @include breakpoint($mq-col2) {
+    min-height: 400px;
+  }
+}
+
 .lobby {
   &__counters {
     margin-top: $block-gap;

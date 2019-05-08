@@ -4,7 +4,7 @@ block moreCss
   !=cssTag("lobby")
 
 block moreJs
-  - var translations = [trans.quickPairing];
+  - var translations = [trans.quickPairing, trans.lobby, trans.player, trans.mode];
   !=jsAt(`compiled/star.lobby${isProd ? (".min"):""}.js`, true)
   !=embedJsUnsafe(`star=window.star||{};star_lobby=${JSON.stringify({data: data, i18n: i18nJsObject(translations)})}`)
   

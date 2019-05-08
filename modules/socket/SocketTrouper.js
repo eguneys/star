@@ -48,13 +48,15 @@ class SocketTrouper extends Trouper {
   eject(uid) {
     this.withMember(uid, (member) => {
       member.end();
-      this.quit(uid, member);
+      this.quit(uid);
     });
   }
 
-  quit(uid, member) {
-    delete this.members[uid];
-    this.starBus.publish(SocketLeave, 'socketLeave');
+  quit(uid) {
+    this.withMember(uid, (member) => {
+      delete this.members[uid];
+      this.starBus.publish(SocketLeave, 'socketLeave');
+                          });
   }
 
   addMember(uid, member) {
@@ -69,6 +71,17 @@ class SocketTrouper extends Trouper {
     if(member) {
       f(member);
     }
+  }
+
+  notifyMember(t, data) {
+    return (member) => {
+      member.push(this.makeMessage(t, data));
+    };
+  }
+
+
+  makeMessage(t, data) {
+    return { t: t, d: data };
   }
 
 }

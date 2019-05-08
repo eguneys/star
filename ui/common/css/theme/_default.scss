@@ -29,6 +29,12 @@ $c-primary: hsl(209, 79%, 53%);
 $c-primary-dim: c-dimmer($c-primary);
 $c-primary-over: #fff;
 
+/* Secondary green */
+$c-secondary: hsl(88, 62%, 37%);
+$c-secondary-dim: c-dimmer($c-secondary);
+$c-secondary-over: #fff;
+
+
 /* Accent: orange */
 $c-accent: hsl(22, 100%, 42%);
 $c-accent-over: #fff;

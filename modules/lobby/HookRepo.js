@@ -3,6 +3,7 @@ module.exports = (() => {
   var hooks = [];
 
   return {
+    vector: () => hooks,
     findCompatible(hook) {
       return hooks.filter(_ => _.compatibleWith(hook));
     },

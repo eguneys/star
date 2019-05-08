@@ -10,26 +10,27 @@ var Handler = {
              socket,
              uid,
              onPing) => {
-               var fullCtrl = (msg) => {
-                 if (!controller(msg)) {
+               var fullCtrl = (t, msg) => {
+                 if (!controller(t, msg)) {
                    baseController(socket,
                                   member,
                                   uid,
-                                  onPing)(msg);
+                                  onPing)(t, msg);
                  }
                };
                ws.on('message', function(msg) {
-                 if (msg === "null") {
+                 msg = JSON.parse(msg);
+                 if (msg === null) {
                    onPing(socket, member, uid);
                  } else {
-                   fullCtrl(msg);
+                   fullCtrl(msg.t, msg);
                  }
                });
   }
 };
 
 function baseController(socket, member, uid) {
-  return function(msg) {
+  return function(t, msg) {
     console.log('base', msg);
   };
 };

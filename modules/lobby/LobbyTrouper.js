@@ -1,27 +1,45 @@
 var Biter = require('./Biter');
 var HookRepo = require('./HookRepo');
 var Trouper = require('../hub/Trouper');
+var { AllHooksFor, RemoveHook } = require('./messageApi');
 
 class LobbyTrouper extends Trouper {
 
+  constructor(socket) {
+    super();
+    this.socket = socket;
+  }
+
   process(msg) {
     switch (msg.type) {
-    case 'addhook':
+    case 'addhook': {
       var hook = msg.hook;
       var _ = HookRepo.byUid(hook.uid);
       if (_) this.remove(_);
 
       var comp = this.findCompatible(hook);
-      console.log(comp);
       if (comp) {
         this.biteHook(comp.id, hook.uid);
       } else {
         HookRepo.save(hook);
+        this.socket.send(msg);
       }
       return true;
-    case 'joinhook':
+    }
+    case 'joinhook': {
       const { hook, game } = msg;
+      this.socket.send(msg);
       this.remove(hook);
+      return true;
+    }
+    case 'hooksub': {
+      const { member, value } = msg;
+      if (value) {
+        this.socket.send(AllHooksFor(member, HookRepo.vector()));
+        return true;
+      }
+      return false;
+    }
     }
     return false;
   }
@@ -51,6 +69,7 @@ class LobbyTrouper extends Trouper {
 
   remove(hook) {
     HookRepo.remove(hook);
+    this.socket.send(RemoveHook(hook.id));
   }
   
 }

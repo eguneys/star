@@ -23,7 +23,11 @@ function i18nHelper(locals) {
   locals.trans = {
     nbPlayers: new Translated('nbPlayers', '%s online players'),
     nbGamesInPlay: new Translated('nbGamesInPlay', '%s games in play'),
-    quickPairing: new Translated('quickPairing', 'Quick Pairing')
+    quickPairing: new Translated('quickPairing', 'Quick Pairing'),
+    lobby: new Translated('lobby', 'Lobby'),
+    player: new Translated('player', 'Player'),
+    mode: new Translated('mode', 'Mode'),
+
   };
 
   locals.i18nJsObject = function(keys) {

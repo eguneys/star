@@ -1,8 +1,9 @@
 @import 'pool';
+@import 'hook-list';
 
 .lobby__app {
   @extend %flex-column;
-  // @include lobby-app-size;
+  @include lobby-app-size;
   user-select: none;
 
   &__content {

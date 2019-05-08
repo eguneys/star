@@ -8,6 +8,11 @@ function Hook(id, uid, mode) {
   this.compatibleWith = (h) => {
     return h.mode === this.mode;
   };
+
+  this.render = () => ({
+    id: this.id,
+    uid: this.uid
+  });
 };
 
 Hook.make = function(uid, sid, mode) {

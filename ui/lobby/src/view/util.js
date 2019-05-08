@@ -1,3 +1,5 @@
+import { h } from 'snabbdom';
+
 export function bind(eventName, f, redraw) {
   return {
     insert(vnode) {
@@ -8,4 +10,10 @@ export function bind(eventName, f, redraw) {
       });
     }
   };
+}
+
+export function tds(bits) {
+  return bits.map(bit => {
+    return h('td', [bit]);
+  });
 }

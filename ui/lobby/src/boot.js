@@ -20,11 +20,6 @@ module.exports = function(cfg, element) {
     
   };
 
-  cfg.trans = star.trans(cfg.i18n);
-  cfg.element = element;
-  cfg.pools = pools;
-  lobby = StarLobby.start(cfg);
-
   star.socket = star.StrongSocket(
     '/lobby/socket/v4',
     false, {
@@ -44,6 +39,12 @@ module.exports = function(cfg, element) {
         onFirstConnect: onFirstConnect
       }
     });
+
+  cfg.trans = star.trans(cfg.i18n);
+  cfg.socketSend = star.socket.send;
+  cfg.element = element;
+  cfg.pools = pools;
+  lobby = StarLobby.start(cfg);
 
   function spreadNumber(el, nbSteps, getDuration) {
     var previous, displayed;

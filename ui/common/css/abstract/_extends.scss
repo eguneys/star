@@ -18,6 +18,11 @@
   @extend %page-font, %page-text-shadow !optional;
 }
 
+%nowrap-hidden {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 %break-word {
   overflow-wrap: break-word;
 }

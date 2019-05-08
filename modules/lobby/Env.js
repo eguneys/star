@@ -10,7 +10,7 @@ function Env(config,
   
   var socket = new LobbySocket(SocketUidTtl, starBus);
 
-  this.lobbyTrouper = LobbyTrouper.start(
+  var lobbyTrouper = LobbyTrouper.start(
     broomPeriod = BroomPeriod,
     starBus
   )(() => {
@@ -19,7 +19,9 @@ function Env(config,
     );
   });
 
-  this.socketHandler = new SocketHandler(socket);
+  this.socketHandler = new SocketHandler(
+    lobbyTrouper,
+    socket);
 
   starBus.subscribe(this.socketHandler, 'nbMembers', 'nbRounds');
 }
