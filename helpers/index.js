@@ -1,5 +1,5 @@
 var ApiEnv = require('../modules/api/Env');
-var apiEnv = ApiEnv.current;
+var apiEnv = ApiEnv.current();
 
 module.exports = function(locals) {
   var isProd = apiEnv.isProd;
@@ -41,8 +41,8 @@ function i18nHelper(locals) {
 
 function assetHelper(locals, isProd) {
 
-  var assetDomain = require('../modules/api/Env').current.AssetDomain;
-  var socketDomain = require('../modules/api/Env').current.SocketDomain;
+  var assetDomain = require('../modules/api/Env').current().AssetDomain;
+  var socketDomain = require('../modules/api/Env').current().SocketDomain;
 
   
   var assetBaseUrl = `//${assetDomain}`;

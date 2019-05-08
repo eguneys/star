@@ -2,9 +2,9 @@ var { Open, OptionFuResult, negotiate } = require('./StarController');
 
 var { PlayerRef } = require('../modules/game/Pov');
 
-var { Env } = require('../Env');
+var Env = require('../Env');
 
-var env = Env.round;
+var env = Env.round();
 
 exports.player = function(req, res) {
   var { fullId } = req.params;

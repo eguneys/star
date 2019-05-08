@@ -1,3 +1,4 @@
+var { lazyVal } = require('../common/LazyVal');
 var { PopulationTell } = require('./actorApi');
 var Population = require('./Population');
 
@@ -12,7 +13,9 @@ function Env(starBus) {
 }
 
 module.exports = {
-  current: new Env(
-    require('../common/ExpressApp').starBus
+  current: lazyVal(() => 
+    new Env(
+      require('../common/ExpressApp').starBus
+    )
   )
 };

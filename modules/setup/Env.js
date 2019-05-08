@@ -1,3 +1,4 @@
+var { lazyVal } = require('../common/LazyVal');
 var Processor = require('./Processor');
 
 function Env(starBus) {
@@ -7,6 +8,8 @@ function Env(starBus) {
 }
 
 module.exports = {
-  current: new Env(
-    require('../common/ExpressApp').starBus)
+  current: lazyVal(() =>
+    new Env(
+      require('../common/ExpressApp').starBus)
+  )
 };

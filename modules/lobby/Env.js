@@ -1,3 +1,4 @@
+var { lazyVal } = require('../common/LazyVal');
 var config = require('config');
 var LobbySocket = require('./LobbySocket');
 var SocketHandler = require('./SocketHandler');
@@ -27,6 +28,7 @@ function Env(config,
 }
 
 module.exports = {
-  current: new Env(config.get("lobby"),
-                   require('../common/ExpressApp').starBus)
+  current: lazyVal(() =>
+    new Env(config.get("lobby"),
+            require('../common/ExpressApp').starBus))
 };

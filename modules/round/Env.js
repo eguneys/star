@@ -1,11 +1,12 @@
+var { lazyVal } = require('../common/LazyVal');
 var config = require('config');
 
 var DuctMap = require('../hub/DuctMap');
 
 var Round = require('./Round');
 
-function Env(config) {
-  
+function Env(config, db) {
+
   var ActiveTtl = config.get("active.ttl");
 
   var roundMap = new DuctMap(
@@ -27,5 +28,8 @@ function Env(config) {
 };
 
 module.exports = {
-  current: new Env(config.get("round"),)
+  current: lazyVal(() => 
+    new Env(config.get("round"),
+            require('../db/Env').current()
+           ))
 };

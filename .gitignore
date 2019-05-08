@@ -12,3 +12,5 @@ node_modules
 public/compiled
 public/trans
 public/css
+
+config/local.json

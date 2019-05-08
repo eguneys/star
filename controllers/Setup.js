@@ -6,7 +6,7 @@ var HTTPRequest = require('../modules/common/HTTPRequest');
 
 var HookConfig = require('../modules/setup/HookConfig');
 
-var { Env } = require('../Env');
+var Env = require('../Env');
 
 var env = Env.setup;
 

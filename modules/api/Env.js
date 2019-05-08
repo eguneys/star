@@ -1,3 +1,4 @@
+var { lazyVal } = require('../common/LazyVal');
 const config = require('config');
 
 function Env({ isProd }) {
@@ -10,7 +11,7 @@ function Env({ isProd }) {
 }
 
 module.exports = {
-  current: new Env({
+  current: lazyVal(() => new Env({
     isProd: require('../common/ExpressApp').isProd
-  })
+  }))
 };
