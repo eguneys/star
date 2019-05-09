@@ -1,0 +1,15 @@
+#main_wrap {
+  --main-max-width: auto;
+}
+
+.round {
+  display: grid;
+  grid-gap: $block-gap;
+
+  &__app { grid-area: app; }
+
+  grid-template-columns: $col3-uniboard-width;
+  grid-template-rows: fit-content(0);
+  grid-template-areas: 'app';
+
+}

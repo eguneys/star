@@ -1,6 +1,10 @@
 /* Widths */
 
 $mq-xx-small: (min-width 500px);
+$mq-small: (min-width 800px);
+$mq-x-large: (min-width 1260px);
+
+$mq-not-small: (max-width 799px);
 
 
 /* Heights */
@@ -10,3 +14,8 @@ $mq-tall: (min-height 600px);
 $mq-x-tall: (min-height 700px);
 
 $mq-site-header-tall: $mq-tall;
+
+/* Orientations */
+
+$mq-portrait: (orientation portrait);
+$mq-landscape: (orientation landscape);

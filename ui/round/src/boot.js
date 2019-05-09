@@ -14,5 +14,7 @@ export default function(opts) {
     }
   );
 
+  opts.element = element;
+  opts.socketSend = star.socket.send;
   round = (window['StarRound']).app(opts);
 }

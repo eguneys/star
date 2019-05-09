@@ -1,0 +1,7 @@
+.main-board {
+  @extend %square-34;
+  
+  .app_wrap {
+    @extend %abs-100;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "round",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "snabbdom": "^0.7.3"
+  }
+}

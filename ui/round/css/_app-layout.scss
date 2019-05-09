@@ -1,0 +1,14 @@
+.round__app {
+  display: grid;
+
+  grid-template-columns: $col2-uniboard-width;
+
+  grid-template-rows: auto;
+
+  grid-template-areas:
+    'board';
+
+  grid-column-gap: $block-gap;
+
+  &__board { grid-area: board }
+}
