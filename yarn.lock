@@ -148,6 +148,11 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
   integrity sha512-jp/uFnooOiO+L211eZOoSyzpOITMXx1rBITauYykG3BRYPu8h0UcxsPNB04RR5vo4Tyz3+ay17tR6JVf9qzYWg==
 
+async@^3.0.1-0:
+  version "3.0.1-0"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.0.1-0.tgz#ca06713f91c3d9eea3e966ace4093f41ef89f200"
+  integrity sha512-b+lONkCWH/GCAIrU0j4m5zed5t+5dfjM2TbUSmKCagx6TZp2jQrNkGL7j1SUb0fF1yH6sKBiXC7Zid8Zj94O6A==
+
 atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"

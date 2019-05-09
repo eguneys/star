@@ -58,7 +58,7 @@ function assetHelper(locals, isProd) {
   };
 
   locals.jsAt = function(path, defer = false) {
-    return `<script src=${assetUrl(path)} ${defer?"defer":""}></script>`;
+    return `<script src=${assetUrl(path)} ${defer?"defer=\"defer\"":""}></script>`;
   };
 
   locals.embedJsUnsafe = function(js) {

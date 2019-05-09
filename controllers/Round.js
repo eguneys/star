@@ -1,3 +1,5 @@
+var async = require('async');
+
 var { Open, OptionFuResult, negotiate } = require('./StarController');
 
 var { PlayerRef } = require('../modules/game/Pov');
@@ -5,6 +7,7 @@ var { PlayerRef } = require('../modules/game/Pov');
 var Env = require('../Env');
 
 var env = Env.round();
+
 
 exports.player = function(req, res) {
   var { fullId } = req.params;
@@ -18,7 +21,11 @@ exports.player = function(req, res) {
 function renderPlayer(pov, res, ctx) {
   negotiate({
     html: () => {
-      res.render('round/player', {});
+      async.parallel({
+        data: (cb) => Env.api().roundApi.player(pov, require('../modules/api/Mobile').Api.currentVersion, ctx).then(cb.bind(null, null))
+      }).then(({data}) => {
+        res.render('round/player', {data});
+      });
     },
     api: (v) => {
 

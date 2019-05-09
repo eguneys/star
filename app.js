@@ -9,12 +9,10 @@ var app = express();
 var server = http.createServer(app);
 var expressWs = require('express-ws')(app, server);
 
-var viewHelpers = require('./helpers');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-viewHelpers(app.locals);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,6 +20,10 @@ app.use(bodyParser.json());
 app.use('/assets', express.static(path.join(__dirname, 'public')));
 
 require('./Env').current().then(() => {
+
+  var viewHelpers = require('./helpers');
+
+  viewHelpers(app.locals);
 
   var indexRouter = require('./routes');
   app.use('/', indexRouter);

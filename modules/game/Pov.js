@@ -1,4 +1,10 @@
 function Pov(game, side) {
+
+  this.player = game.player(side);
+
+  this.playerId = this.player.id;
+
+  this.fullId = game.fullIdOf(side);
   
 }
 

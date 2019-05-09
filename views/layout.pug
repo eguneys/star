@@ -22,8 +22,8 @@ html(lang='en')
     div(id="main-wrap")
       block body
     if (isProd)
-      !=jsAt("compiled/star.site.min.js")
+      !=jsAt("compiled/star.site.min.js", true)
     else
-      !=jsAt("compiled/star.deps.js")
-      !=jsAt("compiled/star.site.js")
+      !=jsAt("compiled/star.deps.js", true)
+      !=jsAt("compiled/star.site.js", true)
     block moreJs

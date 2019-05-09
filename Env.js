@@ -13,6 +13,7 @@ function EnvClass(config) {
 
 const Env = {
   current: lazyVal(() => new EnvClass(config)),
+  api: () => require('./modules/api/Env').current(),
   db: () => require('./modules/db/Env').current(),
   game: () => require('./modules/game/Env').current(),
   round: () => require('./modules/round/Env').current(),

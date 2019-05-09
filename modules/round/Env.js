@@ -4,6 +4,7 @@ var config = require('config');
 var DuctMap = require('../hub/DuctMap');
 
 var Round = require('./Round');
+var JsonView = require('./JsonView');
 
 function Env(config, db) {
 
@@ -25,6 +26,14 @@ function Env(config, db) {
     
     return game;
   };
+
+  const getSocketStatus = (gameId) => {
+    return Promise.resolve({});
+  };
+
+  this.jsonView = new JsonView(
+    getSocketStatus
+  );
 };
 
 module.exports = {

@@ -1,6 +1,14 @@
 extends ../layout
 
+block moreCss
+  !=cssTag("round")
+  
+block moreJs
+  - var translations = [];
+  !=jsAt(`compiled/star.round${isProd?(".min"):""}.js`, true)
+  !=embedJsUnsafe(`star=window.star||{};onload=function(){StarRound.boot(${JSON.stringify({data: data, i18n:i18nJsObject(translations)})})}`)
+  
 block body
   main(class="round")
     div(class="round__app")
-      
+      div(class="round__app__board main-board")

@@ -1,6 +1,6 @@
 ## Star Online Realtime Web Application Boilerplate
 
-Star is a boilerplate for an online realtime web application written in Javascript. The UI is available with different languages support. It's a clone of project [lila](https://github.com/ornicar/lila).
+Star is a boilerplate for an online realtime web application written in Javascript. The UI is available in different languages. It's a clone of project [lila](https://github.com/ornicar/lila).
 
 It relies on [Express](https://expressjs.com/), [Websockets](https://github.com/HenningM/express-ws), and [MongoDB](https://mongodb.org/). The web client is written in [snabbdom](https://github.com/snabbdom/snabbdom), and [Sass](https://sass-lang.com/).
 
@@ -8,7 +8,7 @@ It relies on [Express](https://expressjs.com/), [Websockets](https://github.com/
 
 ### Prerequisites
 
-    Before beginning, please make sure you have the following tools installed
+Before beginning, please make sure you have the following tools installed
 
 #### Tools and dependency managers
 
@@ -31,10 +31,16 @@ To speed up `./ui/build`, install GNU parallel.
 
 ### User Interface
 
-The UI modules are in `ui/`. To work on `ui/round`, Enable auto-recomile:
+The UI modules are in `ui/`. To work on `ui/round`, Enable auto-recompile:
 ```
 cd ui/round
 gulp
+```
+
+The scss are in `ui/`. To work on `scss`, enable auto-recompile:
+```
+cd ui/
+gulp css
 ```
 
 ### Translations
