@@ -12,5 +12,6 @@ router.ws('/lobby/socket/v:apiVersion', lobbyController.socket);
 router.post('/setup/hook/:uid', setupController.hook);
 
 router.get('/:fullId(\\w{12})', roundController.player);
+router.ws('/:fullId(\\w{12})/socket/v:apiVersion', roundController.websocketPlayer);
 
 module.exports = router;

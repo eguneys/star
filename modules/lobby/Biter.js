@@ -3,6 +3,8 @@ var Game = require('../game/Game');
 var GameRepo = require('../game/GameRepo');
 var { JoinHook } = require('./messageApi');
 
+var StarGame = require('jscity').Game;
+
 function apply(hook, uid) {
   if (canJoin(hook)) return join(hook, uid);
   return Promise.reject(`user cannot bite ${hook}`);
@@ -17,7 +19,10 @@ function join(hook, uid) {
 
 function makeGame(hook) {
   return Game
-    .make(Player.make('player1'),
+    .make(StarGame.make(
+      
+    ),
+          Player.make('player1'),
           Player.make('player2'))
     .start();
 }

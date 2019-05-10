@@ -15,6 +15,17 @@
   "round": {
     "active": {
       "ttl": 40
+    },
+    "player": {
+      "disconnect": {
+        "timeout": 120
+      }
+    },
+    "socket": {
+      "timeout": 30
+    },
+    "uid": {
+      "timeout": 10
     }
   },
   "lobby": {

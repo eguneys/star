@@ -1,9 +1,18 @@
 
 class Trouper {
+  constructor() {
+    this.isAlive = true;
+  }
+
   process(msg) {}
 
+  stop() {
+    this.isAlive = false;
+  }
+
   send(msg) {
-    this.run(msg);
+    if (this.isAlive)
+      this.run(msg);
   }
 
   ask(makeMsg) {

@@ -1,6 +1,9 @@
 var async = require('async');
 
 var { Open, OptionFuResult, negotiate } = require('./StarController');
+var { Socket } = require('./StarSocket');
+
+var { getSocketUid } = require('./RequestGetter');
 
 var { PlayerRef } = require('../modules/game/Pov');
 
@@ -8,15 +11,37 @@ var Env = require('../Env');
 
 var env = Env.round();
 
+exports.websocketPlayer = Socket((ws, ctx) => {
+  var { fullId } = ctx.req.params;
+  proxyPov(fullId).then(pov => {
+    if (pov) {
+      const uid = getSocketUid("sri", ctx);
+      if (uid) {
+        requestAiMove(pov).finally(_ => {
+          env.socketHandler.player(ws, pov, uid, ctx.me);
+        });        
+      } else ws.terminate();
+    } else {
+      ws.terminate();
+    }
+  });
+  
+});
 
-exports.player = function(req, res) {
-  var { fullId } = req.params;
-  Open((ctx) => {
-    OptionFuResult(proxyPov(fullId), res, ctx)(pov =>
-      renderPlayer(pov, res, ctx)
-    );
-  })(req, res);
-};
+function requestAiMove(pov) {
+  if (pov.game.playableByAi) {
+    return Env.fishnet.player(pov.game);
+  } else {
+    return Promise.resolve();
+  }
+}
+
+exports.player = Open((res, ctx) => {
+  var { fullId } = ctx.req.params;
+  OptionFuResult(proxyPov(fullId), res, ctx)(pov =>
+    renderPlayer(pov, res, ctx)
+  );
+});
 
 function renderPlayer(pov, res, ctx) {
   negotiate({

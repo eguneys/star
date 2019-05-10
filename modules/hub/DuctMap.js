@@ -2,13 +2,13 @@ var guavaCache = require('guava-cache');
 
 function DuctMap(mkDuct, accessTimeout) {
 
-  this.getOrMake = (id) => this.ducts.get(id);
+  this.getOrMake = (id) => ducts.get(id);
 
-  this.size = () => this.ducts.size();
+  this.size = () => ducts.size();
 
-  this.kill = (id) => this.ducts.delete(id);
+  this.kill = (id) => ducts.delete(id);
 
-  this.ducts = guavaCache({ 
+  var ducts = guavaCache({ 
     expiry: accessTimeout
   })
     .loader((id) => mkDuct(id));

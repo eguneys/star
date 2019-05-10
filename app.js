@@ -1,3 +1,4 @@
+require('./polyfills');
 var http = require('http');
 var path = require('path');
 var createError = require('http-errors');

@@ -1,0 +1,14 @@
+{
+  "name": "stargame",
+  "version": "1.0.0",
+  "main": "game.js",
+  "license": "MIT",
+  "scripts": {
+    "compile": "babel src --out-dir ./"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4"
+  }
+}

@@ -42,6 +42,7 @@ star.StrongSocket = function(url, version, settings) {
   var lastPingTime = now();
   var pongCount = 0;
   var averageLag = 0;
+  var pingTries = 0;
   var tryOtherUrl = false;
   var autoReconnect = true;
   var nbConnects = 0;
@@ -136,7 +137,13 @@ star.StrongSocket = function(url, version, settings) {
     } catch (e) {
       debug(e, true);
     }
-    scheduleConnect(options.pingMaxLag);
+    if (pingTries < options.pingMaxTries) {
+      pingTries++;
+      schedulePing(computePingDelay());
+    } else {
+      pingTries = 0;
+      scheduleConnect(options.pingMaxLag);
+    }
   };
   var computePingDelay = function() {
     return options.pingDelay + (options.idle ? 1000 : 0);
@@ -254,11 +261,12 @@ star.StrongSocket.defaults = {
     name: 'unnamed',
     idle: false,
     pingMaxLag: 9000,
+    pingMaxTries: 5,
     pingDelay: 2500,
     autoReconnectDelay: 3500,
     protocol: location.protocol === 'https:' ? 'wss:' : 'ws:',
     baseUrls: (function(d) {
-      return [d].concat((d === 'socket.oyunkeyf.net' || d === 'socket.o.com' ? [1, 2, 5, 6] : []).map(function(port) {
+      return [d].concat((d === 'socket.oyunkeyf.net' || d === 'socket.o.com' ? [1, 2] : []).map(function(port) {
         return d + ':' + (9020 + port);
       }));
     })(document.body.getAttribute('data-socket-domain')),

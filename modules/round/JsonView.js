@@ -1,4 +1,5 @@
 var async = require('async');
+var { gameJson } = require('../game/JsonView');
 
 module.exports = function JsonView(
   getSocketStatus) {
@@ -12,7 +13,7 @@ module.exports = function JsonView(
     socket: (cb) => getSocketStatus(pov.gameId).then(cb.bind(null, null))
   }).then(({socket}) =>
     ({
-      game: {},
+      game: gameJson(pov.game),
       player: {...commonPlayerJson(pov.game, pov.player, playerUser), ... {
         id: pov.playerId,
         version: socket.version

@@ -1,5 +1,8 @@
 function Pov(game, side) {
 
+  this.game = game;
+  this.side = side;
+
   this.player = game.player(side);
 
   this.playerId = this.player.id;

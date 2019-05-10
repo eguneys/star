@@ -9,3 +9,9 @@ exports.SocketOption = function(f) {
     });
   };
 };
+
+exports.Socket = function(f) {
+  return function(ws, req) {
+    return reqToCtx(req).then(f.bind(null, ws));
+  };
+}
