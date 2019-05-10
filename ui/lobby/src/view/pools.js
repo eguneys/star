@@ -15,7 +15,7 @@ export function render(ctrl) {
       attrs: { 'data-id': pool.id }
     }, [
       h('div.clock', pool.lim),
-      h('div.perf', 'PLAYERS')
+      h('div.perf', pool.name)
     ]);
   });
 }

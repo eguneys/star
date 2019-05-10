@@ -14,25 +14,25 @@
   },
   "round": {
     "active": {
-      "ttl": 40
+      "ttl": 4000
     },
     "player": {
       "disconnect": {
-        "timeout": 120
+        "timeout": 120000
       }
     },
     "socket": {
-      "timeout": 30
+      "timeout": 30000
     },
     "uid": {
-      "timeout": 10
+      "timeout": 10000
     }
   },
   "lobby": {
-    "broom_period": 2,
+    "broom_period": 2000,
     "socket": {
       "uid": {
-          "ttl": 10
+          "ttl": 10000
       }
     }
   }

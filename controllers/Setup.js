@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator/check');
 
-var { reqToCtx } = require('./StarController');
+var { Open } = require('./StarController');
 
 var HTTPRequest = require('../modules/common/HTTPRequest');
 
@@ -10,26 +10,24 @@ var Env = require('../Env');
 
 var env = Env.setup();
 
-exports.hook = function(req, res) {
-  var uid = req.params.uid;
+exports.hook = Open((res, ctx) => {
+  var req = ctx.req;
+  var { uid } = ctx.req.params;
 
-  reqToCtx(req).then((ctx) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ errors: errors.array() });
+    return;
+  }
+  console.log(req.body);
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      res.status(422).json({ errors: errors.array() });
-      return;
+  var config = new HookConfig(req.body.time);
+
+  env.processor.hook(config, uid, HTTPRequest.sid(ctx.req)).then(result => {
+    if (result.type === 'created') {
+      res.status(200).json({ ok: true });
+    } else {
+      res.status(400).json({ 'error': 'game was not created' });
     }
-
-    var config = new HookConfig();
-
-    env.processor.hook(config, uid, HTTPRequest.sid(ctx.req)).then(result => {
-      if (result.type === 'created') {
-        res.status(200).json({ ok: true });
-      } else {
-        res.status(400).json({ 'error': 'game was not created' });
-      }
-    });
-    
   });
-};
+});

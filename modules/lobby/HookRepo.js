@@ -13,6 +13,9 @@ module.exports = (() => {
     byUid(uid) {
       return hooks.find(_ => _.uid === uid);
     },
+    notInUids(uids) {
+      return hooks.filter(h => uids.indexOf(h.uid) === -1);
+    },
     save(hook) {
       hooks = hooks.filter(_ => _.id !== hook.id);
       hooks.push(hook);

@@ -4,7 +4,11 @@ module.exports = class SocketMember {
   }
   
   push(msg) {
-    this.ws.send(JSON.stringify(msg));
+    this.ws.send(JSON.stringify(msg), (err) => {
+      if (err) {
+        console.log('[error sending]', msg, err);
+      }
+    });
   }
 
   end() {

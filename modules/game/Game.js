@@ -24,10 +24,14 @@ function Game({id, player1, player2, status, star, createdAt}) {
     player2
   ];
   
-  this.player = (side) => (side === 'player1')?this.player1:this.player2;
+  this.playerBySide = (side) => (side === 'player1')?this.player1:this.player2;
   this.playerById = (playerId) => this.players.find(_ => _.id === playerId);
 
+  this.player = () => this.playerBySide(this.turnSide());
+
   this.turnSide = () => this.star.player();
+
+  this.turnOf = (p) => p === this.player();
 
   this.fullIdOf = (side) => `${id}${this.player(side).id}`;
 
@@ -38,6 +42,12 @@ function Game({id, player1, player2, status, star, createdAt}) {
   };
 
   this.started = () => this.status.id >= Status.Started.id;
+
+  this.playable = () => this.status.id < Status.Aborted.id;
+
+  this.playableBy = (p) => this.playable() && this.turnOf(p);
+
+  this.playableByAi = () => this.playable() && this.player().isAi;
 
   this.playerIdPov = (playerId) => {
     var _ = this.playerById(playerId);

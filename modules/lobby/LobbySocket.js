@@ -15,6 +15,11 @@ class LobbySocket extends SocketTrouper {
 
   receiveSpecific(msg) {
     switch(msg.type) {
+    case "getuidsp": {
+      const { promise } = msg;
+      promise(Object.keys(this.members));
+      return true;
+    }
     case "join":  {
       var member = new Member(msg.ws, msg.user, msg.uid);
       this.addMember(msg.uid, member);

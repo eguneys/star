@@ -1,7 +1,8 @@
 var Biter = require('./Biter');
 var HookRepo = require('./HookRepo');
 var Trouper = require('../hub/Trouper');
-var { AllHooksFor, RemoveHook } = require('./messageApi');
+var ResilientScheduler = require('../common/ResilientScheduler');
+var { GetUidsP, AllHooksFor, RemoveHook, RemoveHooks } = require('./messageApi');
 
 class LobbyTrouper extends Trouper {
 
@@ -12,6 +13,28 @@ class LobbyTrouper extends Trouper {
 
   process(msg) {
     switch (msg.type) {
+    case 'tick': {
+      const { promise } = msg;
+      this.socket.ask(GetUidsP).then(uids => {
+        this.send(WithPromise(uids, promise));
+      });
+      return true;
+    }
+    case 'withpromise': {
+      const { value, promise } = msg;
+      const uids = value;
+
+      var hooks = HookRepo.notInUids(uids);
+      if (hooks.length > 0) {
+        this.send(RemoveHooks(hooks));
+      }
+      promise();
+      return true;
+    }
+    case 'removehooks': {
+      msg.hooks.forEach(_ => this.remove(_));
+      return true;
+    }
     case 'addhook': {
       var hook = msg.hook;
       var _ = HookRepo.byUid(hook.uid);
@@ -79,8 +102,23 @@ LobbyTrouper.start = function(broomPeriod,
   return function(makeTrouper) {
     var trouper = makeTrouper();
     starBus.subscribe(trouper, 'lobbyTrouper');
+
+    setTimeout(() => {
+      ResilientScheduler(broomPeriod, () => {
+        return trouper.ask(Tick);
+      });
+    },7000);
+
     return trouper;
   };
+};
+
+var Tick = (promise) => {
+  return { type: 'tick', promise };
+};
+
+var WithPromise = (value, promise) => {
+  return { type: 'withpromise', value, promise };
 };
 
 module.exports = LobbyTrouper;

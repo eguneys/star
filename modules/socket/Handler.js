@@ -20,7 +20,6 @@ var Handler = {
                  }
                };
                ws.on('message', function(msg) {
-                 console.log(msg);
                  msg = JSON.parse(msg);
                  if (msg === null) {
                    onPing(socket, member, uid);
