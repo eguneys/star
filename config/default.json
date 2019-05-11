@@ -14,7 +14,7 @@
   },
   "round": {
     "active": {
-      "ttl": 4000
+      "ttl": 40000
     },
     "player": {
       "disconnect": {

@@ -22,3 +22,7 @@ exports.Join = function(ws,
                         resolve) {
   return { type: "join", ws, uid, user, side, playerId, resolve };
 };
+
+exports.HumanPlay = function(playerId, move) {
+  return { type: "humanplay", playerId, move };
+};

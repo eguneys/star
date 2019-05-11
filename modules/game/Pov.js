@@ -3,7 +3,7 @@ function Pov(game, side) {
   this.game = game;
   this.side = side;
 
-  this.player = game.player(side);
+  this.player = game.playerBySide(side);
 
   this.playerId = this.player.id;
 
@@ -21,9 +21,9 @@ const PovObject = {
     return new Pov(game, player.side);
   },
   byPlayerId(game, playerId) {
-    var _ = game.player(playerId);
+    var _ = game.playerById(playerId);
     if (_) {
-      return byPlayer(game, _);
+      return PovObject.byPlayer(game, _);
     }
     return null;
   }

@@ -7,6 +7,7 @@ var { Game: StarGame } = require('jscity');
 
 module.exports = function AiConfig(mode, side) {
   this.mode = mode;
+  this.side = side;
   this.level = 1;
 
   this.fenGame = (builder) => {
@@ -20,11 +21,19 @@ module.exports = function AiConfig(mode, side) {
   this.game = (user) => this.fenGame(starGame => {
     var game = Game
         .make(starGame,
-              Player.makeAi('player1', this.level),
-              Player.make('player2', user)
+              aiOrPlayer('player1', user),
+              aiOrPlayer('player2', user),
              ).start();
     return game;
   });
   
-  this.pov = (user) => Pov.bySide(this.game(user), side);
+  this.pov = (user) => Pov.bySide(this.game(user), this.side);
+
+  var aiOrPlayer = (s, user) => {
+    if (s === this.side) {
+      return Player.make(s, user);
+    } else {
+      return Player.makeAi(s, this.level);
+    }
+  };
 };

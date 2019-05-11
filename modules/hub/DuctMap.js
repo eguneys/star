@@ -1,4 +1,4 @@
-var guavaCache = require('guava-cache');
+var guavaCache = require('guava-cache2');
 
 function DuctMap(mkDuct, accessTimeout) {
 

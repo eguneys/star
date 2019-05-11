@@ -8,7 +8,6 @@ class SocketTrouper extends Trouper {
     super();
 
     this.starBus = starBus;
-
     this.members = {};
     this.aliveUids = new ExpireSetMemo(uidTtl);
 

@@ -14,7 +14,8 @@ module.exports = {
           starBus,
           uidTtl,
           disconnectTimeout,
-          makeHistory(id)
+          makeHistory(id),
+          () => socketMap.touch(id)
         ),
         socketTimeout
       );

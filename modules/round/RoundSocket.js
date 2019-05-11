@@ -8,11 +8,13 @@ class RoundSocket extends SocketTrouper {
               starBus,
               uidTtl,
               disconnectTimeout,
-              history) {
+              history,
+              keepMeAlive) {
     super(uidTtl, starBus);
 
     this.gameId = gameId;
     this.history = history;
+    this.keepMeAlive = keepMeAlive;
   }
 
   receiveSpecific(msg) {
@@ -30,6 +32,13 @@ class RoundSocket extends SocketTrouper {
       return true;
     }
     return false;
+  }
+
+  broom() {
+    super.broom();
+    if (Object.keys(this.members).length > 0) {
+      this.keepMeAlive();
+    }
   }
 
 

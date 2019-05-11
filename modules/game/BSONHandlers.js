@@ -103,5 +103,6 @@ const gameBSONHandler = {
 
 module.exports = {
   gameBSONHandler,
-  playerBSONHandler
+  playerBSONHandler,
+  Fields: F
 };

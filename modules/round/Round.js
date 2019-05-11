@@ -19,6 +19,12 @@ class Round extends Duct {
 
   process(msg) {
     switch(msg.type) {
+    case 'humanplay':
+      var p = msg;
+      this.handleHumanPlay(p, pov => {
+        return this.player.human(p, pov, this.proxy);
+      });
+      return true;
     case 'fishnetplay':
       var { uci } = msg;
       this.handle(game =>
@@ -34,6 +40,23 @@ class Round extends Duct {
     this.handleGame(this.proxy.game(), op);
   }
 
+  handleHumanPlay(p, op) {
+    this.handlePov(this.proxy.playerPov(p.playerId), op);
+  }
+
+  handlePov(fuPov, op) {
+    this.publish(() => {
+      return fuPov.then(pov => {
+        if (!pov) {
+          return Promise.reject("pov not found");
+        }
+        if (pov.player.isAi())
+          return Promise.reject("player cant play AI");
+        else return op(pov);
+      });
+    }).catch(errorHandler("handlePov"));
+  }
+
   handleGame(fuGame, op) {
     this.publish(() => {
       return fuGame.then(game => {
@@ -42,7 +65,7 @@ class Round extends Duct {
         }
         return op(game);
       });
-    }).catch(errorHandler);
+    }).catch(errorHandler("handleGame"));
   }
 
   publish(op) {
@@ -54,8 +77,12 @@ class Round extends Duct {
   }
 }
 
-function errorHandler(err) {
-  console.log(`Round client error ${err} ${err.stack}`);
+function errorHandler(name) { 
+  return (err) => {
+    console.log(`Round client error ${name}
+ ${err}
+ ${err.stack}`);
+  };
 };
 
 module.exports = Round;

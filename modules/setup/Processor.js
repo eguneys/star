@@ -20,7 +20,7 @@ function Processor(bus, fishnetPlayer) {
     var pov = config.pov(ctx.me);
     return GameRepo.insertDenormalized(pov.game)
       .finally(() => {
-        if (pov.game.player().isAi) {
+        if (pov.game.player().isAi()) {
           //fishnetPlayer(pov.game);
         }
       })

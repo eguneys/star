@@ -35,7 +35,9 @@ function Game({id, player1, player2, status, star, createdAt}) {
 
   this.turnOf = (p) => p === this.player();
 
-  this.fullIdOf = (side) => `${id}${this.player(side).id}`;
+  this.turnOfSide = (s) => s === this.turnSide();
+
+  this.fullIdOf = (side) => `${id}${this.playerBySide(side).id}`;
 
   this.start = () => {
     if (this.started()) return this;
@@ -50,6 +52,9 @@ function Game({id, player1, player2, status, star, createdAt}) {
   this.playable = () => this.status.id < Status.Aborted.id;
 
   this.playableBy = (p) => this.playable() && this.turnOf(p);
+
+  this.playableBySide = _ => this.playableBy(this.playerBySide(_));
+
 
   this.playableByAi = () => this.playable() && this.player().isAi();
 
