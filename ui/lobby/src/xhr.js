@@ -7,3 +7,11 @@ export function anonPoolSeek(pool) {
     }
   });
 }
+
+export function anonPoolAi() {
+  return $.ajax({
+    method: 'POST',
+    url: '/setup/ai',
+    data: {}
+  });  
+}

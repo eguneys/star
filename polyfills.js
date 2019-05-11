@@ -7,3 +7,11 @@ Promise.prototype.finally = function(onFinally) {
     err => Promise.resolve(onFinally()).then(() => { throw err; })
   );
 };
+
+// Add `inject()` to `Promise.prototype`
+Promise.prototype.inject = function(value) {
+  return this.then(
+    /* onFulfilled */
+    res => Promise.resolve(value)
+  );
+};

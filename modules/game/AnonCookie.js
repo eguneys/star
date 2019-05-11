@@ -3,6 +3,10 @@ module.exports = (() => {
   var maxAge = 604800;
 
   return {
+    name,
+    expiry() {
+      return new Date(Date.now()+maxAge);
+    },
     json(game, side) {
       return ({
         name,

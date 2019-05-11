@@ -14,5 +14,6 @@ block body
       div(class="lobby__counters")
         a(id="nb_connected_players" href="#")!= trans.nbPlayers("<strong>?</strong>")
         a(id="nb_games_in_play" href="#")!= trans.nbGamesInPlay("<strong>?</strong>")
+    form(class="ai_form" method="POST" action="/setup/ai")
     div(class="lobby__app")
       div(class="lobby__app__content")

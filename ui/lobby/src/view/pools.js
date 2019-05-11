@@ -5,7 +5,10 @@ export function hooks(ctrl) {
   return bind('click', e => {
     const id = e.target.getAttribute('data-id') ||
           e.target.parentNode.getAttribute('data-id');
-    ctrl.clickPool(id);
+    if (id === 'computer') {
+      // ctrl.clickAi();
+      $('.ai_form').trigger('submit');
+    } else if (id) ctrl.clickPool(id);
   }, ctrl.redraw);
 }
 
@@ -17,5 +20,9 @@ export function render(ctrl) {
       h('div.clock', pool.lim),
       h('div.perf', pool.name)
     ]);
-  });
+  }).concat(
+    h('div.custom', {
+      attrs: { 'data-id': 'computer' }
+    }, ctrl.trans.noarg('computer'))
+  );
 }

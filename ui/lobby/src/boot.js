@@ -1,5 +1,5 @@
 module.exports = function(cfg, element) {
-  var pools = [{ id: "2", lim: 2, name: 'HUMAN' }, { id: "3", lim: 3, name: 'COMPUTER' }];
+  var pools = [{ id: "2", lim: 2, name: 'HUMAN' }];
   var lobby;
 
   var nbRoundSpread = spreadNumber(

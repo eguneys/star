@@ -10,6 +10,7 @@ router.get('/', lobbyController.home);
 router.ws('/lobby/socket/v:apiVersion', lobbyController.socket);
 
 router.post('/setup/hook/:uid', setupController.hook);
+router.post('/setup/ai', setupController.ai);
 
 router.get('/:fullId(\\w{12})', roundController.player);
 router.ws('/:fullId(\\w{12})/socket/v:apiVersion', roundController.websocketPlayer);

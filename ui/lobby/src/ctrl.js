@@ -53,6 +53,10 @@ export default function LobbyController(opts, redraw) {
     }
   };
 
+  this.clickAi = () => {
+    xhr.anonPoolAi();
+  };
+
   this.clickPool = (id) => {
     if (!this.data.me) {
       xhr.anonPoolSeek(this.pools.find(p => p.id === id));

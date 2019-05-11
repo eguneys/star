@@ -12,6 +12,9 @@ function Pov(game, side) {
 }
 
 const PovObject = {
+  bySide(game, side) {
+    return new Pov(game, side);
+  },
   byPlayer(game, player) {
     return new Pov(game, player.side);
   },

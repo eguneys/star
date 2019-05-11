@@ -1,6 +1,7 @@
 var { AddHook } = require('../lobby/messageApi');
+var GameRepo = require('../game/GameRepo');
 
-function Processor(bus) {
+function Processor(bus, fishnetPlayer) {
 
   this.hook = function(config, uid, sid) {
     return new Promise(resolve => {
@@ -13,6 +14,17 @@ function Processor(bus) {
         resolve({ type: 'refused' });
       }
     });
+  };
+
+  this.ai = function(config, ctx) {
+    var pov = config.pov(ctx.me);
+    return GameRepo.insertDenormalized(pov.game)
+      .finally(() => {
+        if (pov.game.player().isAi) {
+          //fishnetPlayer(pov.game);
+        }
+      })
+      .inject(pov);
   };
 
 }
