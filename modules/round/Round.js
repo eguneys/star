@@ -55,7 +55,7 @@ class Round extends Duct {
 }
 
 function errorHandler(err) {
-  console.log(`Round client error ${err}`);
+  console.log(`Round client error ${err} ${err.stack}`);
 };
 
 module.exports = Round;

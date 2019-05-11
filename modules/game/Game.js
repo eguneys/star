@@ -43,13 +43,15 @@ function Game({id, player1, player2, status, star, createdAt}) {
     return this;
   };
 
+  this.finished = () => this.status.id >= Status.VariantEnd.id;
+
   this.started = () => this.status.id >= Status.Started.id;
 
   this.playable = () => this.status.id < Status.Aborted.id;
 
   this.playableBy = (p) => this.playable() && this.turnOf(p);
 
-  this.playableByAi = () => this.playable() && this.player().isAi;
+  this.playableByAi = () => this.playable() && this.player().isAi();
 
   this.playerIdPov = (playerId) => {
     var _ = this.playerById(playerId);

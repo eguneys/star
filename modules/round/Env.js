@@ -11,7 +11,10 @@ var JsonView = require('./JsonView');
 var SocketMap = require('./SocketMap');
 var SocketHandler = require('./SocketHandler');
 
-function Env(config, starBus, db) {
+function Env(config,
+             starBus,
+             db,
+             fishnetPlayer) {
 
   var ActiveTtl = config.get("active.ttl");
 
@@ -39,7 +42,7 @@ function Env(config, starBus, db) {
     }
   });
 
-  var player = new Player();
+  var player = new Player(fishnetPlayer);
   
   this.roundProxyGame = (gameId) => {
     var game = roundMap.getOrMake(gameId).getGame();
@@ -76,5 +79,6 @@ module.exports = {
   current: lazyVal(() => 
     new Env(config.get("round"),
             require('../common/ExpressApp').starBus,
-            require('../db/Env').current()))
+            require('../db/Env').current(),
+            require('../fishnet/Env').current().player))
 };

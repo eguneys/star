@@ -35,7 +35,6 @@ class RoundSocket extends SocketTrouper {
 
   notify(events) {
     var vevents = this.history.addEvents(events);
-
     Object.values(this.members).forEach(m => {
       var msgs = this.batchMsgs(m, vevents);
       if (msgs) {

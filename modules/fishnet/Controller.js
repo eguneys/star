@@ -25,6 +25,8 @@ module.exports = function Controller(api) {
     switch(star.prompt) {
     case 'roll':
       return Roll();
+    case 'buycity':
+      return Nobuyland;
     }
     return null;
   };
