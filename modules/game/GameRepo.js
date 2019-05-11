@@ -10,6 +10,10 @@ const GameRepo = (function() {
       return coll.byId(gameId,
                        gameBSONHandler.read);
     },
+    save(progress) {
+      return Promise
+        .resolve('gamerepo save progress');
+    },
 
     insertDenormalized(game) {
       var bson = gameBSONHandler.write(game);

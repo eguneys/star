@@ -1,5 +1,9 @@
 var SocketMember = require('../socket/SocketMember');
 
+exports.EventList = (events) => ({
+  type: 'eventlist', events
+});
+
 exports.Member = class Member extends SocketMember {
 
   constructor(ws, user, side, playerId) {

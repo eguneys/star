@@ -1,4 +1,5 @@
 var events = require('events');
+var Tellable = require('./Tellable');
 
 module.exports = function Bus() {
 
@@ -7,9 +8,20 @@ module.exports = function Bus() {
   };
 
   this.subscribe = function(subscriber, ...to) {
-
     to.forEach(_ => bus.subscribe(subscriber, _));
-    
+  };
+
+  this.subscribeFun = function(to, f) {
+    var t = Tellable.applyFun(f);
+    this.subscribe(t, to);
+  };
+
+  this.subscribeFuns = function(subscriptions) {
+    Object.keys(subscriptions)
+      .forEach((classifier) => {
+        var subscriber = subscriptions[classifier];
+        this.subscribeFun(classifier, subscriber);
+      });
   };
 
   var eventEmitter = new events.EventEmitter();

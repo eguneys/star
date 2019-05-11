@@ -30,7 +30,7 @@ exports.websocketPlayer = Socket((ws, ctx) => {
 
 function requestAiMove(pov) {
   if (pov.game.playableByAi()) {
-    return Env.fishnet.player(pov.game);
+    return Env.fishnet().player.apply(pov.game);
   } else {
     return Promise.resolve();
   }

@@ -8,6 +8,8 @@ module.exports = function TrouperMap(
 
   this.kill = (id) => troupers.delete(id);
 
+  this.tell = (id, msg) => this.getOrMake(id).send(msg);
+
   var troupers = guavaCache({
     expiry: accessTimeout
   })

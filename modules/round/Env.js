@@ -3,6 +3,9 @@ var config = require('config');
 
 var DuctMap = require('../hub/DuctMap');
 
+var History = require('./History');
+
+var Player = require('./Player');
 var Round = require('./Round');
 var JsonView = require('./JsonView');
 var SocketMap = require('./SocketMap');
@@ -18,11 +21,25 @@ function Env(config, starBus, db) {
 
   var roundMap = new DuctMap(
     id => {
-      var duct = new Round(id);
+      var duct = new Round(id, player, socketMap);
       return duct;
     },
     ActiveTtl
   );
+
+
+  starBus.subscribeFuns({
+    roundMapTell: (msg) => {
+      switch(msg.type) {
+      case 'tell':
+        roundMap.tell(msg.id, msg.msg);
+        return true;
+      }
+      return false;
+    }
+  });
+
+  var player = new Player();
   
   this.roundProxyGame = (gameId) => {
     var game = roundMap.getOrMake(gameId).getGame();
@@ -34,6 +51,7 @@ function Env(config, starBus, db) {
   };
 
   var socketMap = SocketMap.make({
+    makeHistory: History.apply(),
     starBus: starBus,
     socketTimeout: SocketTimeout,
     uidTtl: UidTimeout,

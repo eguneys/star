@@ -8,6 +8,7 @@ function EnvClass(config) {
     Env.lobby();
     Env.setup();
     Env.socket();
+    Env.fishnet();
   });
 }
 
@@ -20,6 +21,7 @@ const Env = {
   lobby: () => require('./modules/lobby/Env').current(),
   setup: () => require('./modules/setup/Env').current(),
   socket: () => require('./modules/socket/Env').current(),
+  fishnet: () => require('./modules/fishnet/Env').current(),
 };
 
 module.exports = Env;

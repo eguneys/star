@@ -4,12 +4,15 @@ var { Member } = require('./messageApi');
 
 class RoundSocket extends SocketTrouper {
   
-  constructor(starBus, 
+  constructor(gameId,
+              starBus,
               uidTtl,
-              disconnectTimeout) {
+              disconnectTimeout,
+              history) {
     super(uidTtl, starBus);
 
-    
+    this.gameId = gameId;
+    this.history = history;
   }
 
   receiveSpecific(msg) {
@@ -22,10 +25,33 @@ class RoundSocket extends SocketTrouper {
       this.addMember(msg.uid, member);
       msg.resolve({member});
       return true;
+    case "eventlist":
+      this.notify(msg.events);
+      return true;
     }
     return false;
   }
 
+
+  notify(events) {
+    var vevents = this.history.addEvents(events);
+
+    Object.values(this.members).forEach(m => {
+      var msgs = this.batchMsgs(m, vevents);
+      if (msgs) {
+        m.push(msgs);
+      }
+    });
+  }
+
+  batchMsgs(member, vevents) {
+    switch(vevents.length) {
+    case 0: return null;
+    case 1: return vevents[0].jsFor(member);
+    default:
+      return this.makeMessage("b", vevents.map(_ => _.jsFor(member)));
+    }
+  }
   
 }
 

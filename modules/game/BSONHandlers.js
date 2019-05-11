@@ -19,7 +19,8 @@ const F = {
   },
   Player: {
     id: '_id',
-    side: 's'
+    side: 's',
+    aiLevel: 'a'
   }
 };
 
@@ -27,13 +28,15 @@ const playerBSONHandler = {
   read(bson) {
     return (new Player({
       id: bson[F.Player.id],
-      side: bson[F.Player.side]
+      side: bson[F.Player.side],
+      aiLevel: bson[F.Player.aiLevel]
     }));
   },
   write(player) {
     return {
       [F.Player.id]: player.id,
       [F.Player.side]: player.side,
+      [F.Player.aiLevel]: player.aiLevel
     };  
   }
 };

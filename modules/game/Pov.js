@@ -8,6 +8,8 @@ function Pov(game, side) {
   this.playerId = this.player.id;
 
   this.fullId = game.fullIdOf(side);
+
+  this.gameId = game.id;
   
 }
 

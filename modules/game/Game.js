@@ -2,6 +2,8 @@ var Random = require('../common/Random');
 
 var { Status } = require('jscity');
 
+var Event = require('./Event');
+
 function Game({id, player1, player2, status, star, createdAt}) {
   this.id = id;
   this.status = status;
@@ -55,6 +57,18 @@ function Game({id, player1, player2, status, star, createdAt}) {
       return Pov.byPlayer(this, _);
     }
     return null;
+  };
+
+  this.update = (game, move) => {
+    
+    var events = [Event.Move(move, game)];
+    
+
+    return {
+      game: this,
+      events
+    };
+
   };
 }
 
