@@ -2,6 +2,7 @@ var Env = require('./Env');
 var { gameBSONHandler } = require('./BSONHandlers');
 
 var GameDiff = require('./GameDiff');
+var { Fields: F } = require('./BSONHandlers');
 
 const GameRepo = (function() {
 
@@ -26,10 +27,19 @@ const GameRepo = (function() {
     insertDenormalized(game) {
       var bson = gameBSONHandler.write(game);
       
-      return coll.insert(bson);
+      return coll.insertOne(bson);
+    },
+
+    finish(id, winner, status) {
+      return coll
+        .updateOne({ _id: id },
+                   {...nonEmptyMod("$set", {
+                     [F.Game.winnerSide]: winner,
+                     [F.Game.status]: status.id
+                   })});
     }
+
   };
-  
 
   function nonEmptyMod(mod, doc) {
     if (Object.keys(doc).length === 0) {

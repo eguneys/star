@@ -17,8 +17,22 @@ class Move {
   
 }
 
+class End {
+  constructor(winner) {
+    this.winner = winner;
+
+    this.typ = "end";
+    this.data = {
+      winner
+    };
+  }
+}
+
 module.exports = {
   Move(move, game){
     return new Move(move, game);
+  },
+  End(winner) {
+    return new End(winner);
   }
 };

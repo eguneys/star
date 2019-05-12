@@ -10,6 +10,7 @@ export function makeConfig(ctrl) {
   return {
     players: data.game.fen.players,
     tolls: data.game.fen.tolls,
+    streaks: data.game.fen.streaks,
     prompt: data.game.fen.prompt,
     turns: data.game.turns,
     playerColor: data.player.side,
@@ -18,8 +19,8 @@ export function makeConfig(ctrl) {
       noBuyland: hooks.onNobuyland,
       buyland: hooks.onBuyland,
       roll: hooks.onRoll,
-      sellcities: hooks.onSellcities,
-      selectCity: hooks.onSelectcity,
+      sellCities: hooks.onSellcities,
+      selectCity: hooks.onSelectCity,
       onLoad: hooks.onLoad
     }
   };

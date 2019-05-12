@@ -5,22 +5,34 @@ import { promiseSerial } from './util';
 
 
 export default function RoundController(opts, redraw) {
+
+  this.end = (o) => {
+    d.game.winner = o.winner;
+    d.game.status = o.status;
+
+    var api = this.starcity;
+    if (d.game.winner == d.player.side) {
+      return api.youWin();
+    } else {
+      return api.youLose();
+    }
+  };
   
   this.apiMove = (o) => {
     const d = this.data;
     d.game.turns = o.turns;
     d.game.player = o.turns % 2 === 1 ? 'player1': 'player2';
-
-    console.log('api move', d.game.player, o.prompt);
-
     const activeSide = d.player.side === d.game.player;
     
     this.starcity.clearCamera();
 
-    const actions = o.events.map(eventToAction);
+    const actions = o.events.map(eventToAction.bind(null, o));
     return promiseSerial(actions)
       .then(() => {
         d.game.fen.prompt = o.prompt;
+        d.game.fen.selectCities = o.selectCities;
+        d.game.fen.needMoney = o.needMoney;
+
         this.starcity.set({
           turnColor: d.game.player,
           turns: d.game.turns
@@ -98,20 +110,21 @@ export default function RoundController(opts, redraw) {
   const onNobuyland = () => {
     this.sendMove({uci: 'nobuyland'});
   };
-  const onBuyland = () => {
-    this.sendMove({uci: 'nobuyland'});
+  const onBuyland = (type) => {
+    this.sendMove({uci: 'buy', type});
   };
-  const onSellcities = () => {
-    this.sendMove({uci: 'nobuyland'});
+  const onSellcities = (cities) => {
+    this.sendMove({uci: 'sell', cities});
   };
-  const onSelectCity = () => {
-    this.sendMove({uci: 'nobuyland'});
+  const onSelectCity = (city) => {
+    console.log(city);
+    this.sendMove({uci: 'selectcity', city});
   };
   const onLoad = () => {
     
   };
 
-  const eventToAction = event => {
+  const eventToAction = (o, event) => {
     var api = this.starcity;
     if (event.tornado) {
       return () => api.tornado(event.tornado);

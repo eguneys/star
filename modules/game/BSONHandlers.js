@@ -12,6 +12,12 @@ const F = {
     player2: 'p2',
     turns: 't',
     status: 's',
+
+    winnerSide: 'ws',
+
+    binaryNeedMoney: 'nm',
+    binarySelectCities: 'ss',
+
     binaryStreaks: 'bs',
     binaryTolls: 'bt',
     binaryPlayers: 'bp',
@@ -46,7 +52,6 @@ const gameBSONHandler = {
     function makePlayer(field, side, id) {
       return playerBSONHandler.read(bson[field]);
     }
-
     var playerIds = bson[F.Game.playerIds];
     var p1Id = playerIds.slice(0, 4);
     var p2Id = playerIds.slice(4);
@@ -59,7 +64,9 @@ const gameBSONHandler = {
       streaks: bson[F.Game.binaryStreaks],
       tolls: bson[F.Game.binaryTolls],
       players: bson[F.Game.binaryPlayers],
-      prompt: bson[F.Game.binaryPrompt]
+      prompt: bson[F.Game.binaryPrompt],
+      selectCities: bson[F.Game.selectCities],
+      needMoney: bson[F.Game.needMoney]
     };
 
     var starGame = new StarGame({
@@ -67,6 +74,8 @@ const gameBSONHandler = {
       tolls: decoded.tolls,
       players: decoded.players,
       prompt: decoded.prompt,
+      selectCities: decoded.selectCities,
+      needMoney: decoded.needMoney,
       turnColor: turnColor,
       turns: turns
     });
@@ -92,6 +101,9 @@ const gameBSONHandler = {
         [F.Game.createdAt]: o.createdAt,
       },
       ...{
+        [F.Game.binarySelectCities]: o.board().selectCities,
+        [F.Game.binaryNeedMoney]: o.board().needMoney,
+
         [F.Game.binaryStreaks]: o.board().streaks,
         [F.Game.binaryTolls]: o.board().tolls,
         [F.Game.binaryPlayers]: o.board().players,

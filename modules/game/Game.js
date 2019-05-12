@@ -12,12 +12,13 @@ function Game({id, player1, player2, status, star, createdAt}) {
   this.star = star;
   this.createdAt = createdAt;
 
-
   this.board = () => ({
     streaks: this.star.streaks,
     tolls: this.star.tolls,
     players: this.star.players,
     prompt: this.star.prompt,
+    selectCities: this.star.selectCities,
+    needMoney: this.star.needMoney
   });
   this.turns = () => this.star.turns;
 
@@ -45,6 +46,18 @@ function Game({id, player1, player2, status, star, createdAt}) {
     return this;
   };
 
+  this.finish = (winner, status) => {
+    var events = [Event.End(winner)];
+    this.status = status;
+
+    this.winner = winner;
+
+    return {
+      game: this,
+      events
+    };    
+  };
+
   this.finished = () => this.status.id >= Status.VariantEnd.id;
 
   this.started = () => this.status.id >= Status.Started.id;
@@ -69,8 +82,8 @@ function Game({id, player1, player2, status, star, createdAt}) {
   this.update = (game, move) => {
     
     var events = [Event.Move(move, game)];
-    
 
+    this.status = game.status();
     return {
       game: this,
       events

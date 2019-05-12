@@ -1,6 +1,7 @@
 var { Move } = require('jscity/move');
 
-module.exports = function Player(fishnetPlayer) {
+module.exports = function Player(fishnetPlayer,
+                                 finisher) {
 
   this.human = (play, pov, proxy) => {
     const { playerId, move } = play;
@@ -11,7 +12,7 @@ module.exports = function Player(fishnetPlayer) {
       var progress = applyUci(game, move);
       if (progress) {
         return proxy.save(progress).then(_ => {
-          return postHumanPlay(pov, progress, move);
+          return postHumanPlay(pov, progress, move, proxy);
         });
       } else {
         return Promise.reject("client error");
@@ -26,15 +27,18 @@ module.exports = function Player(fishnetPlayer) {
     return Promise.reject(`${pov} move refused for some reason`);
   };
 
-  function postHumanPlay(pov, progress, move) {
+  function postHumanPlay(pov, progress, move, proxy) {
     var res;
     if (progress.game.finished()) {
-      res = [];
+      res = moveFinish(progress.game,
+                       pov.side,
+                       proxy)
+        .then(_ => [...progress.events, ..._]);
     } else {
       if (progress.game.playableByAi()) {
         requestFishnet(progress.game);
       }
-      res = progress.events;
+      res = Promise.resolve(progress.events);
     }
     return res;
   }
@@ -50,12 +54,15 @@ module.exports = function Player(fishnetPlayer) {
             var res;
 
             if (progress.game.finished()) {
-              res = [];
+              res = moveFinish(progress.game,
+                               game.turnSide(),
+                               proxy)
+                .then(_ => [...progress.events, ..._]);
             } else {
               if (progress.game.playableByAi()) {
                 requestFishnet(progress.game);
               }
-              res = progress.events;
+              res = Promise.resolve(progress.events);
             }
             return res;
           });
@@ -73,11 +80,7 @@ module.exports = function Player(fishnetPlayer) {
     }
   }
 
-  function applyUci(game, uci) {
-    var move = Move.apply(uci);
-    if (!move) {
-      return null;
-    }
+  function applyUci(game, move) {
     const newGame = game.star.move(move);
 
     if (!newGame) {
@@ -85,6 +88,10 @@ module.exports = function Player(fishnetPlayer) {
     }
 
     return game.update(newGame, move);
+  }
+
+  function moveFinish(game, side, proxy) {
+    return finisher.other(game, game.star.winner, proxy);
   }
 
 };

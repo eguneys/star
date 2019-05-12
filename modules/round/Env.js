@@ -5,6 +5,7 @@ var DuctMap = require('../hub/DuctMap');
 
 var History = require('./History');
 
+var Finisher = require('./Finisher');
 var Player = require('./Player');
 var Round = require('./Round');
 var JsonView = require('./JsonView');
@@ -42,7 +43,12 @@ function Env(config,
     }
   });
 
-  var player = new Player(fishnetPlayer);
+
+  var finisher = new Finisher();  
+
+
+  var player = new Player(fishnetPlayer, 
+                          finisher);
   
   this.roundProxyGame = (gameId) => {
     var game = roundMap.getOrMake(gameId).getGame();

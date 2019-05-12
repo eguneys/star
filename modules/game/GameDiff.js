@@ -13,6 +13,8 @@ module.exports = function GameDiff(game) {
   d(F.Game.binaryTolls, _ => _.board().tolls);
   d(F.Game.binaryPlayers, _ => _.board().players);
   d(F.Game.binaryPrompt, _ => _.board().prompt);
+  d(F.Game.binarySelectCities, _ => _.board().selectCities);
+  d(F.Game.binaryNeedMoney, _ => _.board().needMoney);
 
   return { sets, unsets };
 };

@@ -1,7 +1,8 @@
 export function make(send, ctrl) {
 
   const handlers = {
-    move: ctrl.apiMove
+    move: ctrl.apiMove,
+    end: ctrl.end
   };
 
   var lastProm = Promise.resolve();

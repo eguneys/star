@@ -44,7 +44,7 @@ const process = (op) => Open((res, ctx) => {
     return;
   }
 
-  var config = new AiConfig(ctx.req.body.time, 'player2');
+  var config = new AiConfig(ctx.req.body.time, 'player1');
 
   op(config, ctx).then(pov => {
     negotiate({

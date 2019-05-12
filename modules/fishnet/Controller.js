@@ -1,3 +1,4 @@
+var { Cities, Tiles } = require('jscity/state');
 
 module.exports = function Controller(api) {
 
@@ -26,8 +27,37 @@ module.exports = function Controller(api) {
     case 'roll':
       return Roll();
     case 'buycity':
-      return Nobuyland;
+      var lands = ["land", "building", "villa", "hotel"];
+      var buyland;
+      lands.forEach(land => {
+        const player = star.players[star.turnColor];
+        const cost = Cities[Tiles[player.currentTile].key][land].cost;
+        if (player.cash >= cost)
+          buyland = land;
+      });
+      if (buyland) {
+        return Buy(buyland);
+      } else {
+        return Nobuyland;
+      }
+    case 'sell': {
+      const cities = [];
+      for (var key of Object.keys(star.tolls)) {
+        const toll = star.tolls[key];
+        if (toll.owner === 'player1') {
+          cities.push(key);
+        }
+      }
+      return Sell(cities);
     }
+    case 'themecity':
+    case 'starcity':
+    case 'reducetolls': {
+      const cities = star.selectCities;
+      return SelectCity(cities[0]);
+    }
+    }
+    
     return null;
   };
 };
