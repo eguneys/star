@@ -1400,15 +1400,10 @@ js-stringify@^1.0.1:
   resolved "https://registry.yarnpkg.com/js-stringify/-/js-stringify-1.0.2.tgz#1736fddfd9724f28a3682adc6230ae7e4e9679db"
   integrity sha1-Fzb939lyTyijaCrcYjCufk6Weds=
 
-jscity2@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/jscity2/-/jscity2-1.0.0.tgz#4020ee763662c14e0bc9bfd8258d1a5bc28dcb7c"
-  integrity sha512-XWnY2O94+yJ07lXlz0QtmJujaD5gBv/0cHiJIB9q6SjUpwxXXw3VcV0VaZ6lWRXl4YvEQI+b8tA7BzQ7BNO2Yg==
-
-jscity@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/jscity/-/jscity-1.0.0.tgz#548e432b07c966838f3ae58d566623e37a5595cf"
-  integrity sha512-89km5lr91kZt6sAFahkE729AkwaASNANqsW1y13rzwk7fnuvXoJ7m8QTXEtefEnWcUamvKxxHlwHM9s7lpDIRA==
+jscity@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/jscity/-/jscity-1.0.2.tgz#bed233f8c835eec37583b548a5fe5943ae0939e5"
+  integrity sha512-r2YdOHA/NDsiBHETpe6qNpCCkcZRJPJZJUMfJYzJ3BYxlQCMiaXLapxm6/89pi2ThXPMQrmNrxFR9vKZEZ/mJg==
 
 json5@^1.0.1:
   version "1.0.1"
