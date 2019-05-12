@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "gulp dev",
+    "prod": "yarn install && gulp prod"
+  },
   "devDependencies": {
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "gulp": "^4.0.2",
     "snabbdom": "^0.7.3"
   }
 }

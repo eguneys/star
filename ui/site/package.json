@@ -2,7 +2,12 @@
   "name": "site",
   "version": "1.0.0",
   "license": "MIT",
-  "devDependencies": {
+  "scripts": {
+    "dev": "gulp dev",
+    "prod": "yarn install && gulp prod"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1"
   }
 }

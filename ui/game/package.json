@@ -4,7 +4,7 @@
   "main": "game.js",
   "license": "MIT",
   "scripts": {
-    "compile": "babel src --out-dir ./"
+    "compile": "yarn install && babel src --out-dir ./"
   },
   "dependencies": {
     "@babel/cli": "^7.4.4",

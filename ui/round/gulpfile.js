@@ -1,3 +1,5 @@
+const gulp = require('gulp');
+
 const starGulp = require('../gulp/jsProject.js');
 
-starGulp('StarRound', 'star.round', __dirname);
+starGulp(gulp, 'StarRound', 'star.round', __dirname);

@@ -33,12 +33,14 @@ build() {
   echo "build" "$@"
   set -ev
   cd ui/$1
-  gulp $target        
+  #gulp $target
+  yarn run $target
 }
 
 if [ $mode != "upgrade" ] && [ $mode != "js" ]; then
   echo "build css"
-  (cd ui && gulp "css-$target")
+  #(cd ui && gulp "css-$target")
+  (cd ui && yarn run css-$target)
   #touch public/css/*.min.css  
 fi
 

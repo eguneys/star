@@ -1,4 +1,4 @@
-const gulp = require('gulp');
+// const gulp = require('gulp');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const colors = require('ansi-colors');
@@ -9,7 +9,7 @@ const browserify = require('browserify');
 const terser = require('gulp-terser');
 const size = require('gulp-size');
 
-module.exports = (standalone, fileBaseName, dir) => {
+module.exports = (gulp, standalone, fileBaseName, dir) => {
 
   const browserifyOpts = (debug) => ({
     entries: [`${dir}/src/main.js`],

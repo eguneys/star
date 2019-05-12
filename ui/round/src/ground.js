@@ -1,4 +1,4 @@
-import { City } from 'city';
+import { City } from 'starcity';
 
 import { h } from 'snabbdom';
 import * as util from './util';

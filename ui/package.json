@@ -2,7 +2,12 @@
   "name": "ui",
   "version": "1.0.0",
   "license": "MIT",
+  "scripts": {
+    "css-prod": "gulp css-prod",
+    "css-dev": "gulp css-dev"
+  },
   "dependencies": {
+    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babelify": "^10.0.0",

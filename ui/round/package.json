@@ -2,7 +2,14 @@
   "name": "round",
   "version": "1.0.0",
   "license": "MIT",
+  "scripts": {
+    "dev": "gulp dev",
+    "prod": "yarn install && gulp prod"
+  },
   "dependencies": {
-    "snabbdom": "^0.7.3"
+    "gulp": "^4.0.2",
+    "snabbdom": "^0.7.3",
+    "stargame": "file:./../game",
+    "common": "file:./../common"
   }
 }
