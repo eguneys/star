@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "babel src --out-dir ./"
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4"

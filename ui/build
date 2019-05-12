@@ -9,6 +9,7 @@ echo "yarn: $(yarn --version)"
 
 
 # cd "$(git rev-parse --show-toplevel)"
+yarn install
 
 mkdir -p public/compiled
 
