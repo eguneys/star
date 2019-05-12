@@ -4,8 +4,9 @@ const MongoClient = require('mongodb').MongoClient;
 var config = require('config');
 var ExtendColl = require('./CollExt');
 
-function Env(name, config) {
-  var uri = config.get('uri');
+function Env(name) {
+  // var uri = config.get('uri');
+  var uri = process.env.MONGO_URI;
 
   this.promise = new Promise(resolve => {
     MongoClient.connect(uri, { useNewUrlParser: true })
@@ -22,5 +23,5 @@ function Env(name, config) {
 }
 
 module.exports = {
-  current: lazyVal(() => new Env("main", config.get("mongodb")))
+  current: lazyVal(() => new Env("main"))
 };

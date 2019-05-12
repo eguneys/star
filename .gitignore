@@ -14,3 +14,4 @@ public/trans
 public/css
 
 config/local.json
+config/production.json

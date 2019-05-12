@@ -44,6 +44,20 @@ gulp.task('css', gulp.series([
   startWatching
 ]));
 
+gulp.task('css-dev', gulp.series([createThemedBuilds, build]));
+
+gulp.task('css-prod', () => gulp
+          .src(sourcesGlob)
+          .pipe(sass({
+            ...sassOptions,
+            ...{ outputStyle: 'compressed' }
+          }).on('error', sass.logError))
+          .pipe(renameAs('min'))
+          .pipe(destination())
+         );
+
+
+
 function renameAs(ext) {
   return rename(path => {
     path.dirname = '';

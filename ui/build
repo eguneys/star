@@ -1,0 +1,45 @@
+target=${1-dev}
+mode=${2-build} # build upgrade css js
+echo "building ui modules with target=$target and mode=$mode"
+
+echo "node: $(node --version)"
+echo "yarn: $(yarn --version)"
+
+
+cd "$(git rev-parse --show-toplevel)"
+
+mkdir -p public/compiled
+
+apps1="common game"
+apps="site lobby round"
+
+if [ $mode == "upgrade" ]; then
+   yarn upgrade --non-interactive
+else
+   yarn install --non-interactive
+fi
+
+build_js() {
+  echo "build_js" "$@"
+  set -ev
+  cd ui/$1
+  yarn run compile           
+}
+
+build() {
+  echo "build" "$@"
+  set -ev
+  cd ui/$1
+  gulp $target        
+}
+
+if [ $mode != "upgrade" ] && [ $mode != "js" ]; then
+  echo "build css"
+  (cd ui && gulp "css-$target")
+  #touch public/css/*.min.css  
+fi
+
+if [ $mode != "css" ]; then
+   for app in $apps1; do (build_js $app); done
+   for app in $apps; do (build $app); done
+fi

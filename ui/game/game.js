@@ -20,5 +20,5 @@ function isPlayerPlaying(data) {
 }
 
 function isPlayerTurn(data) {
-  return isPlayerPlaying(data) && data.game.player == data.player.side;
+  return isPlayerPlaying(data) && data.game.player === data.player.side;
 }

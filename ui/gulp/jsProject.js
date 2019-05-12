@@ -5,7 +5,8 @@ const colors = require('ansi-colors');
 const logger = require('fancy-log');
 const watchify = require('watchify');
 const browserify = require('browserify');
-const uglify = require('gulp-uglify');
+//const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const size = require('gulp-size');
 
 module.exports = (standalone, fileBaseName, dir) => {
@@ -23,13 +24,14 @@ module.exports = (standalone, fileBaseName, dir) => {
         .bundle()
         .pipe(source(`${fileBaseName}.min.js`))
         .pipe(buffer())
-        .pipe(uglify())
+        //.pipe(uglify())
+        .pipe(terser())
         .pipe(size())
         .pipe(destination());
 
   const dev = () => browserify(browserifyOpts(true))
         .transform('babelify',
-                   { presets: ['@babel/preset-env'], sourcemaps: true })
+                   { presets: ['@babel/preset-env'] })
         .bundle()
         .pipe(source(`${fileBaseName}.js`))
         .pipe(destination());
