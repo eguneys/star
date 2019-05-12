@@ -1400,6 +1400,11 @@ js-stringify@^1.0.1:
   resolved "https://registry.yarnpkg.com/js-stringify/-/js-stringify-1.0.2.tgz#1736fddfd9724f28a3682adc6230ae7e4e9679db"
   integrity sha1-Fzb939lyTyijaCrcYjCufk6Weds=
 
+jscity@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jscity/-/jscity-1.0.0.tgz#548e432b07c966838f3ae58d566623e37a5595cf"
+  integrity sha512-89km5lr91kZt6sAFahkE729AkwaASNANqsW1y13rzwk7fnuvXoJ7m8QTXEtefEnWcUamvKxxHlwHM9s7lpDIRA==
+
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
