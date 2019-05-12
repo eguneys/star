@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www --ignore ui/ --ignore public/",
-    "heroku-postbuild": "./ui/build prod"
+    "heroku-postbuild": "cd ./ui && yarn install && cd ../ && ./ui/build prod"
   },
   "license": "MIT",
   "dependencies": {
