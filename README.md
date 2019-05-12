@@ -1,6 +1,6 @@
 ## Star Online Realtime Web Application Boilerplate
 
-Star is a boilerplate for an online realtime web application written in Javascript. The UI is available in different languages. It's a clone of project [lila](https://github.com/ornicar/lila).
+Star is a boilerplate for an online realtime web application written in Javascript. It's a clone of project [lila](https://github.com/ornicar/lila).
 
 It relies on [Express](https://expressjs.com/), [Websockets](https://github.com/HenningM/express-ws), and [MongoDB](https://mongodb.org/). The web client is written in [snabbdom](https://github.com/snabbdom/snabbdom), and [Sass](https://sass-lang.com/).
 
@@ -42,7 +42,3 @@ The scss are in `ui/`. To work on `scss`, enable auto-recompile:
 cd ui/
 gulp css
 ```
-
-### Translations
-1. New translation keys are added in `translation/source/site.xml` and `translation/dest/`
-2. Then regenerate translation keys with `node bin/trans-dump.js`
