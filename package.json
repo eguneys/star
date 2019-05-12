@@ -16,6 +16,7 @@
     "express-ws": "^4.0.0",
     "guava-cache2": "^0.7.4",
     "jscity": "^1.0.0",
+    "jscity2": "^1.0.0",
     "mongodb": "^3.2.3",
     "mongodb-uri": "^0.9.7",
     "node-cache": "^4.2.0",
